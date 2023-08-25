@@ -78,7 +78,8 @@
         }
     }
     if ($_SERVER["REQUEST_METHOD"] != "POST" || $erreur == true) {
-        echo "Erreur de chargement";
+        echo "Erreur présente";
+    } else {
     }
     ?>
 
@@ -87,22 +88,22 @@
         <div class="row text-center py-5">
             <div class="col-12">
 
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <form  method="post">
                     Nom : <input type="text" name="nom"><br>
                     Mot de passe : <input type="password" name="mdp"><br>
                     **** Confirmation Mot de passe : <input type="password" name="mdp2"><br>
                     Courriel : <input type="email" name="courriel"><br>
                     Avatar : <input type="text" name="avatar"><br>
-                    Sexe : Homme<input type="radio" name="sexe" checked> Femme<input type="radio" name="sexe"> Non genré<input type="radio" name="sexe"><br>
+                    Sexe : Homme<input type="radio" name="sexe" value="homme" checked> Femme<input type="radio" name="sexe" value="femme"> Non genré<input type="radio" name="sexe" value="nongenre"><br>
                     Date de naissance : <input type="date" name="date"><br>
-                    Moyen de transport :<select name="transpot">
+                    Moyen de transport :<select name="transport">
                         <option value="auto">Auto</option>
                         <option value="autobus">Autobus</option>
                         <option value="marche">Marche</option>
                         <option value="velo">Vélo</option>
                     </select><br>
 
-                    <input type="submit">
+                    <input type="submit" value="Créer l'utilisateur" id="create">
                 </form>
 
             </div>
@@ -117,18 +118,35 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-
+    $nom = $_POST['nom'];
+    $mdp = $_POST['mdp'];
+    $courriel = $_POST['courriel'];
+    $avatar = $_POST['avatar'];
+    $date = $_POST['date'];
+    $transport = $_POST['transport'];
     ?>
 
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="$_POST['avatar']" alt="Card image cap">
+
+
+
+    <div class="card" style="width: 18rem;" id="div2">
+        <img class="card-img-top" src="<?php echo $avatar; ?>" alt="Card image cap">
+
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title"><?php echo $nom; ?></h5>
+            <p class="card-text"> Votre courriel: <?php echo $courriel; ?><br>
+                La date de naissance: <?php echo $date; ?><br>
+                Votre moyen de transport: <?php echo $transport; ?><br>
+            </p>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <input type="submit" value="Créer un autre utilisateur">
+            </form>
         </div>
     </div>
 
+
+
+    <script src="js/java.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 
