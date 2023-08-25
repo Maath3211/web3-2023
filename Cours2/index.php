@@ -79,19 +79,34 @@
     }
     if ($_SERVER["REQUEST_METHOD"] != "POST" || $erreur == true) {
         echo "Erreur présente";
-    } else {
-    }
-    ?>
+    } 
+    else { ?>
+        <div class="card" style="width: 18rem;" id="div2">
+        <img class="card-img-top" src="<?php echo $avatar; ?>" alt="Card image cap">
+
+        <div class="card-body">
+            <h5 class="card-title"><?php echo $nom; ?></h5>
+            <p class="card-text"> Votre courriel: <?php echo $courriel; ?><br>
+                La date de naissance: <?php echo $date; ?><br>
+                Votre moyen de transport: <?php echo $transport; ?><br>
+            </p>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <input type="submit" value="Créer un autre utilisateur">
+            </form>
+        </div>
+    </div>
+   <?php } ?>
+    
 
 
     <div id="container" class="container-fluid">
         <div class="row text-center py-5">
             <div class="col-12">
 
-                <form  method="post">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     Nom : <input type="text" name="nom"><br>
                     Mot de passe : <input type="password" name="mdp"><br>
-                    **** Confirmation Mot de passe : <input type="password" name="mdp2"><br>
+                    Confirmation Mot de passe : <input type="password" name="mdp2"><br>
                     Courriel : <input type="email" name="courriel"><br>
                     Avatar : <input type="text" name="avatar"><br>
                     Sexe : Homme<input type="radio" name="sexe" value="homme" checked> Femme<input type="radio" name="sexe" value="femme"> Non genré<input type="radio" name="sexe" value="nongenre"><br>
@@ -129,20 +144,8 @@
 
 
 
-    <div class="card" style="width: 18rem;" id="div2">
-        <img class="card-img-top" src="<?php echo $avatar; ?>" alt="Card image cap">
+    
 
-        <div class="card-body">
-            <h5 class="card-title"><?php echo $nom; ?></h5>
-            <p class="card-text"> Votre courriel: <?php echo $courriel; ?><br>
-                La date de naissance: <?php echo $date; ?><br>
-                Votre moyen de transport: <?php echo $transport; ?><br>
-            </p>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <input type="submit" value="Créer un autre utilisateur">
-            </form>
-        </div>
-    </div>
 
 
 
