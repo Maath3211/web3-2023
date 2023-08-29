@@ -53,6 +53,12 @@
                 ?>
         </tbody>
     </table>
+    <div class=" text-center">
+
+    <form action="ajouter.php" method="post">
+        <input type="submit" class="btn btn-primary" value="Ajouter">
+    </form>
+    </div>
 
 
 
