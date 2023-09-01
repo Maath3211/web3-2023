@@ -55,7 +55,8 @@
     </table>
     <div class=" text-center">
 
-    <form action="ajouter.php" method="post">
+    
+    <form action="ajouter.php" method="POST">
         <input type="submit" class="btn btn-primary" value="Ajouter">
     </form>
     </div>
