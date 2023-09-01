@@ -50,29 +50,29 @@
 
     <?php
     $erreur = false;
+    if (empty($_POST['nom'])) {
+        $erreur = true;
+        echo "Le nom est requis <br>";
+    }
+    if (empty($_POST['nationalite'])) {
+        $erreur = true;
+        echo "La nationalité est requise <br>";
+    }
+    if (empty($_POST['equipe'])) {
+        $erreur = true;
+        echo "L'équipe est requise <br>";
+    }
+    if (empty($_POST['numero'])) {
+        $erreur = true;
+        echo "Le numéro est requis <br>";
+    }
+    if (empty($_POST['img'])) {
+        $erreur = true;
+        echo "L'image est requise <br>";
+    }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && $erreur == false) {
-        if (empty($_POST['nom'])) {
-            $erreur = true;
-            echo "Le nom est requis <br>";
-        }
-        if (empty($_POST['nationalite'])) {
-            $erreur = true;
-            echo "La nationalité est requise <br>";
-        }
-        if (empty($_POST['equipe'])) {
-            $erreur = true;
-            echo "L'équipe est requise <br>";
-        }
-        if (empty($_POST['numero'])) {
-            $erreur = true;
-            echo "Le numéro est requis <br>";
-        }
-        if (empty($_POST['img'])) {
-            $erreur = true;
-            echo "L'image est requise <br>";
-        }
-        
+
         $nom = "";
         $natio = "";
         $equipe = "";
@@ -99,17 +99,17 @@
 
         $sql    =    "INSERT    INTO    pilote    (id, nom, nationalite, equipe, numero, img)
         VALUES    (NULL, $nom, $natio, $equipe, $num, $img)";
-        echo $sql;
-        /*if (mysqli_query($conn,    $sql)) {
-            echo    "Enregistrement    réussi";
+
+        if (mysqli_query($conn,    $sql)) {
+            header("Location: index.php");
+            exit();
         } else {
             echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
-        }*/
+        }
 
         mysqli_close($conn);
-    } 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") echo "erreur post <br>";
-    if ($erreur == true) echo "erreur = true";
+    }
+
     ?>
 
 
