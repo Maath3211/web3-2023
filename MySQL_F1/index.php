@@ -14,6 +14,7 @@
     <table class="table table-hover table-striped">
         <thead>
             <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Nationalité</th>
                 <th scope="col">Équipe</th>
@@ -39,12 +40,16 @@
                 if ($result->num_rows   >   0) {
 
                     while ($row   =   $result->fetch_assoc()) {
-                        echo '<td>' . $row["nom"] . '</td> 
+                        echo '
+
+        <td>' . $row["id"] . '</td>
+        <td>' . $row["nom"] . '</td> 
         <td>' . $row["nationalite"] . '</td>
         <td>' . $row["equipe"] . '</td>
         <td>' . $row["numero"] . '</td>
         <td>' . '<img src="' . $row["img"] . '" alt="$row["nom"]">' . '</td>
-        </tr>';
+        <td>  <a href="modifier.php?id=' . $row["id"] . '">Modifier</a> </td>
+        </tr> ';
                     }
                 } else {
                     echo   "0   results";
@@ -55,10 +60,10 @@
     </table>
     <div class=" text-center">
 
-    
-    <form action="ajouter.php" method="POST">
-        <input type="submit" class="btn btn-primary" value="Ajouter">
-    </form>
+
+        <form action="ajouter.php" method="POST">
+            <input type="submit" class="btn btn-primary" value="Ajouter">
+        </form>
     </div>
 
 

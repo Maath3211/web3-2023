@@ -10,14 +10,39 @@
 </head>
 
 <body>
+    <?php
+    $id = $_GET['id'];
 
+    $servername    =    "localhost";
+    $username    =    "root";
+    $password    =    "root";
+    $dbname    =    "f1";
+    //    Create    connection
+    $conn    =    mysqli_connect($servername,    $username,    $password,    $dbname);
+    //    Check    connection
+    if (!$conn) {
+        die("Connection    failed:    "    .    mysqli_connect_error());
+    }
+    $conn->query('SET NAMES utf8');
+    $sql   =   "SELECT   id,   nom, nationalite, equipe, img, numero   FROM   pilote WHERE id = 2";
+    $result   =   $conn->query($sql);
+        $nom = $row["nom"];
+        $natio = $row["nationalite"];
+        $equipe = $row["equipe"];
+        $num = $row["numero"];
+        $img = $row["img"];
+        echo $nom . $natio . $equipe . $num . $img;
+      
+
+    mysqli_close($conn);
+    ?>
 
     <div id="container" class="container-fluid">
         <div class="row text-center py-5">
             <div class="col-6 offset-3">
 
 
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
                     <div class="form-group">
                         <label for="nom">Nom du pilote</label>
                         <input type="text" class="form-control" name="nom" placeholder="Entrez le nom">
@@ -39,7 +64,7 @@
                         <input type="text" class="form-control" name="img" placeholder="Entrez le lien de l'image">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
                     <a class='btn btn-primary' href='index.php' role='button'>Retour</a>
                 </form>
             </div>
@@ -50,28 +75,28 @@
 
     <?php
     $erreur = false;
-    if (empty($_POST['nom'])) {
+    if (empty($_GET['nom'])) {
         $erreur = true;
         echo "Le nom est requis <br>";
     }
-    if (empty($_POST['nationalite'])) {
+    if (empty($_GET['nationalite'])) {
         $erreur = true;
         echo "La nationalité est requise <br>";
     }
-    if (empty($_POST['equipe'])) {
+    if (empty($_GET['equipe'])) {
         $erreur = true;
         echo "L'équipe est requise <br>";
     }
-    if (empty($_POST['numero'])) {
+    if (empty($_GET['numero'])) {
         $erreur = true;
         echo "Le numéro est requis <br>";
     }
-    if (empty($_POST['img'])) {
+    if (empty($_GET['img'])) {
         $erreur = true;
         echo "L'image est requise <br>";
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && $erreur == false) {
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && $erreur == false) {
 
         $nom = "";
         $natio = "";
@@ -90,11 +115,11 @@
         }
 
 
-        $nom = '"' . $_POST['nom'] . '"';
-        $natio = '"' . $_POST['nationalite'] . '"';
-        $equipe = '"' . $_POST['equipe'] . '"';
-        $num = '"' . $_POST['numero'] . '"';
-        $img = '"' . $_POST['img'] . '"';
+        $nom = '"' . $_GET['nom'] . '"';
+        $natio = '"' . $_GET['nationalite'] . '"';
+        $equipe = '"' . $_GET['equipe'] . '"';
+        $num = '"' . $_GET['numero'] . '"';
+        $img = '"' . $_GET['img'] . '"';
 
 
         $sql    =    "INSERT    INTO    pilote    (id, nom, nationalite, equipe, numero, img)
@@ -111,16 +136,6 @@
     }
 
     ?>
-
-
-
-
-
-
-
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
