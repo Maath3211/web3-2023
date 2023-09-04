@@ -24,15 +24,16 @@
         die("Connection    failed:    "    .    mysqli_connect_error());
     }
     $conn->query('SET NAMES utf8');
-    $sql   =   "SELECT   id,   nom, nationalite, equipe, img, numero   FROM   pilote WHERE id = 2";
+    $sql   =   "SELECT   id,   nom, nationalite, equipe, img, numero   FROM   pilote WHERE id = $id";
     $result   =   $conn->query($sql);
+    if ($result->num_rows   >   0) {
+    $row   =   $result->fetch_assoc();
         $nom = $row["nom"];
         $natio = $row["nationalite"];
         $equipe = $row["equipe"];
         $num = $row["numero"];
         $img = $row["img"];
-        echo $nom . $natio . $equipe . $num . $img;
-      
+    }
 
     mysqli_close($conn);
     ?>
@@ -44,24 +45,28 @@
 
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
                     <div class="form-group">
+                        <label for="nom">ID</label>
+                        <input type="text" disabled class="form-control" name="id" value="<?php echo $id ?>">
+                    </div>
+                    <div class="form-group">
                         <label for="nom">Nom du pilote</label>
-                        <input type="text" class="form-control" name="nom" placeholder="Entrez le nom">
+                        <input type="text" class="form-control" name="nom" value="<?php echo $nom ?>" placeholder="Entrez le nom">
                     </div>
                     <div class="form-group">
                         <label for="nationalite">Nationalité du pilote</label>
-                        <input type="text" class="form-control" name="nationalite" placeholder="Entrez la nationalité">
+                        <input type="text" class="form-control" name="nationalite" value="<?php echo $natio ?>" placeholder="Entrez la nationalité">
                     </div>
                     <div class="form-group">
                         <label for="equipe">Nom de l'équipe</label>
-                        <input type="text" class="form-control" name="equipe" placeholder="Entrez le nom">
+                        <input type="text" class="form-control" name="equipe" value="<?php echo $equipe ?>" placeholder="Entrez le nom">
                     </div>
                     <div class="form-group">
                         <label for="numero">Numéro du pilote</label>
-                        <input type="text" class="form-control" name="numero" placeholder="Entrez le numéro du pilote">
+                        <input type="text" class="form-control" name="numero" value="<?php echo $num ?>" placeholder="Entrez le numéro du pilote">
                     </div>
                     <div class="form-group">
                         <label for="img">Lien de l'image</label>
-                        <input type="text" class="form-control" name="img" placeholder="Entrez le lien de l'image">
+                        <input type="text" class="form-control" name="img" value="<?php echo $img ?>" placeholder="Entrez le lien de l'image">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Modifier</button>
@@ -97,12 +102,6 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && $erreur == false) {
-
-        $nom = "";
-        $natio = "";
-        $equipe = "";
-        $num = "";
-        $img = "";
         $servername    =    "localhost";
         $username    =    "root";
         $password    =    "root";
@@ -122,15 +121,15 @@
         $img = '"' . $_GET['img'] . '"';
 
 
-        $sql    =    "INSERT    INTO    pilote    (id, nom, nationalite, equipe, numero, img)
-        VALUES    (NULL, $nom, $natio, $equipe, $num, $img)";
+        $sql    =    "UPDATE 'pilote' SET 'Nom' = $nom, 'Nationalite' = $natio, 'Equipe' = $equipe,'Numero' = $num, 'Img' = $img WHERE 'pilote'.'id' = $id ";
 
-        if (mysqli_query($conn,    $sql)) {
+        echo $sql;
+        /* if (mysqli_query($conn,    $sql)) {
             header("Location: index.php");
             exit();
         } else {
             echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
-        }
+        }*/
 
         mysqli_close($conn);
     }
