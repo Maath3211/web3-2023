@@ -125,13 +125,13 @@
         $sql    =    "UPDATE `pilote` SET `Nom` = $nom , `Nationalite` = $natio, `Equipe` = $equipe,
          `Img` = $img, `Numero` = $num WHERE `pilote`.`id` = $id;";
         if (mysqli_query($conn,    $sql)) {
-            header("Location: index.php");
+            header("Location: index.php?action=2");
             exit();
         } else {
             echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
         }
 
-        mysqli_close($conn);
+        $conn->close();
     }
 
     ?>
