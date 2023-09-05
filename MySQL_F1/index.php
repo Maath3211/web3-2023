@@ -36,19 +36,26 @@
                 }
                 $conn->query('SET NAMES utf8');
                 $sql   =   "SELECT   id,   nom, nationalite, equipe, img, numero   FROM   pilote";
+                $sqlDelete = "";
                 $result   =   $conn->query($sql);
                 if ($result->num_rows   >   0) {
 
                     while ($row   =   $result->fetch_assoc()) {
                         echo '
-
         <td>' . $row["id"] . '</td>
         <td>' . $row["nom"] . '</td> 
         <td>' . $row["nationalite"] . '</td>
         <td>' . $row["equipe"] . '</td>
         <td>' . $row["numero"] . '</td>
         <td>' . '<img src="' . $row["img"] . '" alt="$row["nom"]">' . '</td>
-        <td>  <a href="modifier.php?id=' . $row["id"] . '">Modifier</a> </td>
+        <td>  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
+        <td> 
+        <form action=' . htmlspecialchars($_SERVER["PHP_SELF"]) . ' method="POST">' .
+                            $sqlDelete   =   "DELETE FROM `pilote` WHERE `pilote`.`id` = " . $row["id"] .
+                            $result2   =   ->query($sqlDelete) .
+                            '<button type="submit" class="btn btn-primary">Supprimer</button>
+        </form>
+        </td>
         </tr> ';
                     }
                 } else {
