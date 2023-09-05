@@ -20,7 +20,7 @@
               </div>';
                 break;
             case 2:
-                echo '<div class="alert alert-success" role="alert">
+                echo '<div class="alert alert-danger" role="alert">
                 L\'élément à été modifier avec succès
               </div>';
                 break;
