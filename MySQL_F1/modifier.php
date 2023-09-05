@@ -27,7 +27,8 @@
     $sql   =   "SELECT   id,   nom, nationalite, equipe, img, numero   FROM   pilote WHERE id = $id";
     $result   =   $conn->query($sql);
     if ($result->num_rows   >   0) {
-    $row   =   $result->fetch_assoc();
+        $row   =   $result->fetch_assoc();
+        $id = $row['id'];
         $nom = $row["nom"];
         $natio = $row["nationalite"];
         $equipe = $row["equipe"];
@@ -46,7 +47,7 @@
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
                     <div class="form-group">
                         <label for="nom">ID</label>
-                        <input type="text" disabled class="form-control" name="id" value="<?php echo $id ?>">
+                        <input type="text" readonly class="form-control" name="id" value="<?php echo $id ?>">
                     </div>
                     <div class="form-group">
                         <label for="nom">Nom du pilote</label>
@@ -121,15 +122,14 @@
         $img = '"' . $_GET['img'] . '"';
 
 
-        $sql    =    "UPDATE 'pilote' SET 'Nom' = $nom, 'Nationalite' = $natio, 'Equipe' = $equipe,'Numero' = $num, 'Img' = $img WHERE 'pilote'.'id' = $id ";
-
-        echo $sql;
-        /* if (mysqli_query($conn,    $sql)) {
+        $sql    =    "UPDATE `pilote` SET `Nom` = $nom , `Nationalite` = $natio, `Equipe` = $equipe,
+         `Img` = $img, `Numero` = $num WHERE `pilote`.`id` = $id;";
+        if (mysqli_query($conn,    $sql)) {
             header("Location: index.php");
             exit();
         } else {
             echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
-        }*/
+        }
 
         mysqli_close($conn);
     }
