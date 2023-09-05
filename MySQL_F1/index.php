@@ -52,7 +52,7 @@
         <td> 
         <form action=' . htmlspecialchars($_SERVER["PHP_SELF"]) . ' method="POST">' .
                             $sqlDelete   =   "DELETE FROM `pilote` WHERE `pilote`.`id` = " . $row["id"] .
-                            $result2   =   ->query($sqlDelete) .
+                            $conn->query($sqlDelete) .
                             '<button type="submit" class="btn btn-primary">Supprimer</button>
         </form>
         </td>
