@@ -1,3 +1,5 @@
+<?php session_start()?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +12,8 @@
 </head>
 
 <body>
-
+<?php 
+if ($_SESSION['connexion'] == true) {?>
 
     <div id="container" class="container-fluid">
         <div class="row text-center py-5">
@@ -110,7 +113,17 @@
         mysqli_close($conn);
     }
 
-    ?>
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        session_unset();
+        session_destroy();
+        header('Location: ' . 'conn.php');
+        die();
+     }
+    } else {
+        header('Location: ' . 'conn.php');
+        die();
+    } ?>
+    
 
 
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 29, 2023 at 09:28 PM
+-- Generation Time: Sep 08, 2023 at 12:24 PM
 -- Server version: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -45,6 +45,28 @@ INSERT INTO `pilote` (`id`, `Nom`, `Nationalite`, `Equipe`, `Img`, `Numero`) VAL
 (3, 'Max Verstappen', 'Néerlandais', 'Red Bull Racing-Honda RBPT', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Max_Verstappen_2017_Malaysia_3_%28cropped%29.jpg/330px-Max_Verstappen_2017_Malaysia_3_%28cropped%29.jpg', 1),
 (4, 'Alex Albon', 'Thaïlandais', 'Williams-Racing', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Alex_albon_%2851383514844%29_%28cropped%29.jpg/330px-Alex_albon_%2851383514844%29_%28cropped%29.jpg', 23);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usagers`
+--
+
+CREATE TABLE `usagers` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(1024) NOT NULL,
+  `ip` varchar(1024) NOT NULL,
+  `machine` varchar(1024) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Dumping data for table `usagers`
+--
+
+INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `ip`, `machine`) VALUES
+(1, 'maath3211', 'mathys.l.lessard@gmail.com', '153fa238cec90e5a24b85a79109f91ebe68ca481', '206.167.139.192', 'Inconnu');
+
 --
 -- Indexes for dumped tables
 --
@@ -56,6 +78,14 @@ ALTER TABLE `pilote`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `usagers`
+--
+ALTER TABLE `usagers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -64,6 +94,11 @@ ALTER TABLE `pilote`
 --
 ALTER TABLE `pilote`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `usagers`
+--
+ALTER TABLE `usagers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

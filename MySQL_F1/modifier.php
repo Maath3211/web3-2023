@@ -1,3 +1,5 @@
+<?php session_start()?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +13,7 @@
 
 <body>
     <?php
+    if ($_SESSION['connexion'] == true) {
     $id = $_GET['id'];
 
     $servername    =    "localhost";
@@ -101,7 +104,7 @@
         $erreur = true;
         echo "L'image est requise <br>";
     }
-
+    
     if ($_SERVER["REQUEST_METHOD"] == "GET" && $erreur == false) {
         $servername    =    "localhost";
         $username    =    "root";
@@ -134,8 +137,16 @@
         $conn->close();
     }
 
-    ?>
-
+     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        session_unset();
+        session_destroy();
+        header('Location: ' . 'conn.php');
+        die();
+     }
+    } else {
+        header('Location: ' . 'conn.php');
+        die();
+    } ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 
