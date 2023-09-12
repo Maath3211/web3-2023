@@ -1,0 +1,12 @@
+.imgFace{
+    width: 20%;
+    margin: 5%;
+}
+#btnConn{
+    position: fixed;
+    right: 40px;
+    top: 10px;
+}
+#rouge{
+    color: red;
+}
