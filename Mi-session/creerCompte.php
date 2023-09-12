@@ -84,7 +84,7 @@
                         $servername = "localhost";
                         $username = "root";
                         $password = "root";
-                        $db = "f1";
+                        $db = "smileyface";
                         // Create connection
                         $conn = new mysqli($servername, $username, $password, $db);
                         // Check connection
@@ -92,8 +92,8 @@
                             die("Connection failed: " . $conn->connect_error);
                         }
                         $conn->query('SET NAMES utf8');
-                        $sql   =   "INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `ip`, `machine`) 
-                    VALUES (NULL, '$nom', '$email', $pass, '', '');";
+                        $sql   =   "INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `role`) 
+                    VALUES (NULL, '$nom', '$email', $pass, '');";
 
                         if (mysqli_query($conn,    $sql)) {
                             $_SESSION['connexion'] = true;
