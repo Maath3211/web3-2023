@@ -1,12 +1,23 @@
 .imgFace{
-    width: 20%;
     margin: 5%;
+    margin-top: 2%;
+    width: 20%;
 }
 #btnConn{
     position: fixed;
     right: 40px;
     top: 10px;
 }
+#btnRet{
+    position: fixed;
+    right: 150px;
+    top: 10px;
+}
 #rouge{
     color: red;
+}
+
+#actionTxt{
+    font-size: 30px;
+    margin-bottom: 1%;
 }

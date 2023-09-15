@@ -21,7 +21,8 @@
                 <div class="form-group">
                     <label for="event" class="mt-2">Événement</label>
                     <select name="event" id="select" class="form-select">
-                        <?php
+
+                        <?php 
                         $servername = "localhost";
                         $username = "root";
                         $password = "root";
@@ -51,8 +52,8 @@
 
                     </select>
                 </div>
-                <button type="button" id="btnSubmit" class="btn btn-info">Continuer</button>
-
+                <button type="button" id="btnFeedEl" class="btn btn-info">Continuer(Étudiant)</button>
+                <button type="button" id="btnFeedEmp" class="btn btn-success">Continuer(Employeur)</button>
 
             </div>
         </div>

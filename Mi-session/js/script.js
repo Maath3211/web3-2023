@@ -1,7 +1,11 @@
 let select = document.getElementById("select");
-let choix = select.value;
 
-let btn = document.getElementById("btnSubmit");
+let btn = document.getElementById("btnFeedEl");
 btn.addEventListener("click", function(){
-    window.location.assign("feedback.php?id=" + choix);
+    window.location.assign("FeedbackEleve.php?id=" + select.value);
+})
+
+let btn1 = document.getElementById("btnFeedEmp");
+btn1.addEventListener("click", function(){
+    window.location.assign("FeedbackEmp.php?id=" + select.value);
 })

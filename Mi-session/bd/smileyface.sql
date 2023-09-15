@@ -1,0 +1,102 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.4.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Sep 15, 2023 at 12:45 PM
+-- Server version: 5.7.11
+-- PHP Version: 7.0.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `smileyface`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `lieu` varchar(500) NOT NULL,
+  `nom` varchar(500) NOT NULL,
+  `departement` varchar(500) NOT NULL,
+  `bad` int(11) NOT NULL,
+  `neutral` int(11) NOT NULL,
+  `good` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `date`, `lieu`, `nom`, `departement`, `bad`, `neutral`, `good`) VALUES
+(1, '2023-09-19', 'Cégep', 'Souper', 'Info', 0, 0, 0),
+(2, '2023-04-10', 'cegep', 'Souper2', '2', 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usagers`
+--
+
+CREATE TABLE `usagers` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(1024) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `usagers`
+--
+
+INSERT INTO `usagers` (`id`, `username`, `password`, `email`, `role`) VALUES
+(1, 'math', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'mathys.l.lessard@gmail.com', 'Administrateur'),
+(2, 'root', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 'root@root.com', '');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `usagers`
+--
+ALTER TABLE `usagers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `usagers`
+--
+ALTER TABLE `usagers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
