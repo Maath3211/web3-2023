@@ -14,7 +14,6 @@
 <body>
     <?php
     if ($_SESSION['connexion'] == true) {
-
     ?>
 
         <div id="container" class="container-fluid">
@@ -40,11 +39,11 @@
                                 </a>
                                 <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
-                                        <a href="../compte/creerCompte.php" class="nav-link px-0"> <span class="d-none d-sm-inline"> Ajouter</span></a>
+                                        <a href="creerCompte.php" class="nav-link px-0"> <span class="d-none d-sm-inline"> Ajouter</span></a>
                                     </li>
 
                                     <li>
-                                        <a href="../compte/modifier.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                        <a href="liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -56,10 +55,10 @@
                             <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 
                                 <li>
-                                    <a href="ajouter.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
+                                    <a href="../evenement/ajouter.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
                                 </li>
                                 <li>
-                                    <a href="" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                    <a href="../evenement/afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
                                 </li>
                             </ul>
                             </li>
@@ -79,15 +78,26 @@
 
 
 
-                <div class="col-6 offset-1 ">
-
+                <div class="col-6 offset-1 mt-4">
+                    <?php if (!empty($_GET)) {
+                        $action = $_GET['action'];
+                        switch ($action) {
+                            case 1:
+                                echo '<div class="alert alert-success" role="alert">
+                                        Le compte à été supprimer avec succès
+                                      </div>';
+                                break;
+                            case 2:
+                                echo '<div class="alert alert-success" role="alert">
+                                        Le compte à été désactiver avec succès
+                                     </div>';
+                                break;
+                        }
+                    } ?>
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Nom de l'évenement</th>
-                                <th scope="col">Lieu</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Département</th>
+                                <th scope="col">Nom d'utilisateur</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -104,16 +114,17 @@
                                     die("Connection failed: " . $conn->connect_error);
                                 }
                                 $conn->query('SET NAMES utf8');
-                                $sql   =   "SELECT   id,nom, lieu,departement,date FROM   events";
+                                $sql   =   "SELECT   username, id, enabled   FROM   usagers";
                                 $result   =   $conn->query($sql);
                                 if ($result->num_rows   >   0) {
 
                                     while ($row   =   $result->fetch_assoc()) {
                                         echo '
-                                <td>' . $row["nom"] . '</td> 
-                                <td>' . $row["lieu"] . '</td> 
-                                <td>' . $row["departement"] . '</td> 
-                                <td>' . $row["date"] . '</td> 
+                                <td>' . $row["username"] . '</td> 
+                                <td>  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
+                                <td>  <a href="desactiver.php?id=' . $row["id"] . '" class="btn ' . ($row["enabled"] == 0 ? 'btn-info' : 'btn-warning') . '">' .
+                                            ($row["enabled"] == 0 ? 'Activer' : 'Desactiver') . '</a> </td>
+                                <td>  <a href="supprimer.php?id=' . $row["id"] . '"  class="btn btn-danger">Supprimer</a> </td>
                                 </tr> ';
                                     }
                                 }

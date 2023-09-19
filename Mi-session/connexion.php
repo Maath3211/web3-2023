@@ -56,18 +56,18 @@
                         die("Connection failed: " . $conn->connect_error);
                     }
                     $conn->query('SET NAMES utf8');
-                    $sql   =   "SELECT * FROM   usagers WHERE username = '$nom' AND password='$pass'";
+                    $sql   =   "SELECT * FROM   usagers WHERE username = '$nom' AND password='$pass' AND enabled='1'";
 
                     $result   =   $conn->query($sql);
                     if ($result->num_rows   >   0) {
                         $row   =   $result->fetch_assoc();
-                        if ($nom == $row["username"] && $pass == $row["password"])
+                        if ($nom == $row["username"] && $pass == $row["password"] && $row["enabled"] == 1)
                             echo '<h1>Connexion reussi</h1>';
                         $_SESSION['connexion'] = true;
                         header('Location: ' . 'compte/creerCompte.php');
                         die();
                     } else echo '<br><br><h4 class="rouge">Nom d\'utilisateur ou mot de passe éronné</h4>';
-
+                        
 
                     $conn->close();
                 }
