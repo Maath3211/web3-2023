@@ -15,6 +15,55 @@
 <body>
     <?php
     if ($_SESSION['connexion'] == true) {
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $erreur = false;
+            if (empty($_POST['event'])) {
+                $erreur = true;
+                echo "Le nom de l'évenement est requis <br>";
+            }
+            if (empty($_POST['lieu'])) {
+                $erreur = true;
+                echo "Le lieu est requis <br>";
+            }
+            if (empty($_POST['dateEvent'])) {
+                $erreur = true;
+                echo "La date est requise <br>";
+            }
+            if (empty($_POST['dep'])) {
+                $erreur = true;
+                echo "Le département est requis <br>";
+            }
+
+            if ($erreur == false) {
+                $nom = $_POST['event'];
+                $lieu = $_POST['lieu'];
+                $dateEvent = $_POST['dateEvent'];
+                $dep = $_POST['dep'];
+
+                $servername = "localhost";
+                $username = "root";
+                $password = "root";
+                $db = "smileyface";
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $db);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $conn->query('SET NAMES utf8');
+                $sql   =   "INSERT INTO `events` (`id`, `date`, `lieu`, `nom`, `departement`, `bad`, `neutral`, `good`, `badEmp`, `neutralEmp`, `goodEmp`) 
+            VALUES (NULL, '$dateEvent', '$lieu', '$nom', '$dep',0,0,0,0,0,0);";
+
+                if (mysqli_query($conn,    $sql)) {
+                    header("Location: afficher.php");
+                } else {
+                    echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
+                }
+                $conn->close();
+        }
+        
+    }
     ?>
 
 
@@ -105,60 +154,8 @@
                     </form>
 
                 <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $erreur = false;
-                    if (empty($_POST['event'])) {
-                        $erreur = true;
-                        echo "Le nom de l'évenement est requis <br>";
-                    }
-                    if (empty($_POST['lieu'])) {
-                        $erreur = true;
-                        echo "Le lieu est requis <br>";
-                    }
-                    if (empty($_POST['dateEvent'])) {
-                        $erreur = true;
-                        echo "La date est requise <br>";
-                    }
-                    if (empty($_POST['dep'])) {
-                        $erreur = true;
-                        echo "Le département est requis <br>";
-                    }
-
-                    if ($erreur == false) {
-                        $nom = $_POST['event'];
-                        $lieu = $_POST['lieu'];
-                        $dateEvent = $_POST['dateEvent'];
-                        $dep = $_POST['dep'];
-
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "root";
-                        $db = "smileyface";
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password, $db);
-                        // Check connection
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
-                        $conn->query('SET NAMES utf8');
-                        $sql   =   "INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `enabled`) 
-                    VALUES (NULL, '$nom', '$email', $pass, 1);";
-
-                        $sqlCheck   =   "SELECT   username FROM   usagers";
-                        $result   =   $conn->query($sqlCheck);
-                        if ($result->num_rows   >   0) {
-                            while ($row   =   $result->fetch_assoc()) {
-
-                                if (mysqli_query($conn,    $sql)) {
-                                    echo '<h5 class="text-success">Compte ajouté avec succès<h5>';
-                                } else {
-                                    echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
-                                }
-                            $conn->close();
-                        }
-                    }
-                }
-            }
+                
+        }
                 ?>
                 </div>
             </div>
