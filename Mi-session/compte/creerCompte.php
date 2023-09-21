@@ -62,7 +62,10 @@
                                     <a href="../evenement/ajouter.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
                                 </li>
                                 <li>
-                                    <a href="../evenement/afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                    <a href="../evenement/afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
+                                </li>
+                                <li>
+                                    <a href="../evenement/ajoutDep.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Département</span></a>
                                 </li>
                             </ul>
                             </li>
@@ -105,6 +108,7 @@
                     </form>
 
                 <?php
+                
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $erreur = false;
                     if (empty($_POST['nom'])) {
@@ -170,8 +174,10 @@
                         }
                     }
                 }
-            }
-                ?>
+            }else {
+                header('Location: ' . '../connexion.php');
+                die();
+            } ?>
                 </div>
             </div>
         </div>

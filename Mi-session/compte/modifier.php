@@ -35,6 +35,51 @@
             $id = $row["id"];
         }
         mysqli_close($conn);
+
+        
+        $erreur = false;
+        if (empty($_GET['username'])) {
+            $erreur = true;
+            echo "Le nom est requis <br>";
+        }
+        if (empty($_GET['pass'])) {
+            $erreur = true;
+            echo "Le mot de passe est requis <br>";
+        }
+        if (empty($_GET['passConf'])) {
+            $erreur = true;
+            echo "La confirmation de mot de passe est requise <br>";
+        }
+
+
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && $erreur == false) {
+            $servername    =    "localhost";
+            $username    =    "root";
+            $password    =    "root";
+            $dbname    =    "smileyface";
+            //    Create    connection
+            $conn    =    mysqli_connect($servername,    $username,    $password,    $dbname);
+            //    Check    connection
+            if (!$conn) {
+                die("Connection    failed:    "    .    mysqli_connect_error());
+            }
+            $nom = '"' . $_GET['username'] . '"';
+            $pass = $_GET['pass'];
+            $passConf = $_GET['passConf'];
+
+            if ($pass == $passConf) {
+                $pass = "'" . sha1($pass, false) . "'";
+
+                $sql    =    "UPDATE `usagers` SET `username` = $nom, `password` = $pass WHERE `usagers`.`id` = $id;";
+                if (mysqli_query($conn,    $sql)) {
+                    header("Location: liste.php");
+                    exit();
+                } else {
+                    echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
+                }
+            } else echo 'Les mots de passe ne correspondent pas';
+            $conn->close();
+        }
     ?>
 
         <div id="container" class="container-fluid">
@@ -76,7 +121,10 @@
                                     <a href="../evenement/ajouter.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
                                 </li>
                                 <li>
-                                    <a href="../evenement/afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                    <a href="../evenement/afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
+                                </li>
+                                <li>
+                                    <a href="../evenement/ajoutDep.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Département</span></a>
                                 </li>
                             </ul>
                             </li>
@@ -113,8 +161,7 @@
                             <input type="password" class="form-control" name="passConf" placeholder="Entrez la confirmation de mot de passe">
                         </div>
                         <div class="form-group">
-                            <label for="nom">ID</label>
-                            <input type="text" readonly class="form-control" name="id" value="<?php echo $id ?>">
+                            <input type="text" hidden class="form-control" name="id" value="<?php echo $id ?>">
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Modifier</button>
@@ -126,49 +173,9 @@
 
                 <?php
 
-                $erreur = false;
-                if (empty($_GET['username'])) {
-                    $erreur = true;
-                    echo "Le nom est requis <br>";
-                }
-                if (empty($_GET['pass'])) {
-                    $erreur = true;
-                    echo "Le mot de passe est requis <br>";
-                }
-                if (empty($_GET['passConf'])) {
-                    $erreur = true;
-                    echo "La confirmation de mot de passe est requise <br>";
-                }
-
-
-                if ($_SERVER["REQUEST_METHOD"] == "GET" && $erreur == false) {
-                    $servername    =    "localhost";
-                    $username    =    "root";
-                    $password    =    "root";
-                    $dbname    =    "smileyface";
-                    //    Create    connection
-                    $conn    =    mysqli_connect($servername,    $username,    $password,    $dbname);
-                    //    Check    connection
-                    if (!$conn) {
-                        die("Connection    failed:    "    .    mysqli_connect_error());
-                    }
-                    $nom = '"' . $_GET['username'] . '"';
-                    $pass = $_GET['pass'];
-                    $passConf = $_GET['passConf'];
-
-                    if ($pass == $passConf) {
-                        $pass = "'" . sha1($pass, false) . "'";
-
-                        $sql    =    "UPDATE `usagers` SET `username` = $nom, `password` = $pass WHERE `usagers`.`id` = $id;";
-                        if (mysqli_query($conn,    $sql)) {
-                            header("Location: liste.php");
-                            exit();
-                        } else {
-                            echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
-                        }
-                    } else echo 'Les mots de passe ne correspondent pas';
-                    $conn->close();
-                }
+            }else {
+                header('Location: ' . 'conn.php');
+                die();
             } ?>
 
                 </div>

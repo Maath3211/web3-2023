@@ -38,13 +38,13 @@
                                     <i class="fs-4 bi-speedometer2"></i>
                                     <h3 class="ms-1 d-none d-sm-inline">Compte</h3>
                                 </a>
-                                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="../compte/creerCompte.php" class="nav-link px-0"> <span class="d-none d-sm-inline"> Ajouter</span></a>
                                     </li>
 
                                     <li>
-                                        <a href="../compte/modifier.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                        <a href="../compte/liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -53,13 +53,16 @@
                                 <i class="fs-4 bi-bootstrap"></i>
                                 <h2 class="ms-1 d-none d-sm-inline">Évenement</h2>
                             </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 
                                 <li>
                                     <a href="ajouter.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
                                 </li>
                                 <li>
-                                    <a href="" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                    <a href="" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
+                                </li>
+                                <li>
+                                    <a href="ajoutDep.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Département</span></a>
                                 </li>
                             </ul>
                             </li>
@@ -80,7 +83,31 @@
 
 
                 <div class="col-6 offset-1 ">
-
+                    <?php if (!empty($_GET)) {
+                        $action = $_GET['action'];
+                        switch ($action) {
+                            case 1:
+                                echo '<div class="alert alert-success" role="alert">
+                                        L\'évenement à été supprimer avec succès
+                                      </div>';
+                                break;
+                            case 2:
+                                echo '<div class="alert alert-success" role="alert">
+                                            L\'évenement à été ajouter avec succès
+                                          </div>';
+                                break;
+                            case 3:
+                                echo '<div class="alert alert-success" role="alert">
+                                L\'évenement à été désactiver avec succès
+                                              </div>';
+                                break;
+                            case 4:
+                                echo '<div class="alert alert-success" role="alert">
+                                L\'évenement à été activé avec succès
+                                                  </div>';
+                                break;
+                        }
+                    } ?>
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
@@ -104,7 +131,7 @@
                                     die("Connection failed: " . $conn->connect_error);
                                 }
                                 $conn->query('SET NAMES utf8');
-                                $sql   =   "SELECT   id,nom, lieu,departement,date FROM   events";
+                                $sql   =   "SELECT   id,nom, lieu,departement,date,actif FROM   events";
                                 $result   =   $conn->query($sql);
                                 if ($result->num_rows   >   0) {
 
@@ -114,6 +141,10 @@
                                 <td>' . $row["lieu"] . '</td> 
                                 <td>' . $row["departement"] . '</td> 
                                 <td>' . $row["date"] . '</td> 
+                                <td>  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
+                                <td>  <a href="supprimer.php?id=' . $row["id"] . '" class="btn btn-danger">Supprimer</a> </td>
+                                <td>  <a href="actif.php?id=' . $row["id"] . '" class="btn ' . ($row["actif"] == 0 ? 'btn-warning' : 'btn-info') . '">' .
+                                            ($row["actif"] == 0 ? 'Inactif' : 'Actif') . '</a> </td>
                                 </tr> ';
                                     }
                                 }
@@ -127,7 +158,10 @@
             </div>
         </div>
 
-    <?php } ?>
+    <?php } else {
+        header('Location: ' . '../connexion.php');
+        die();
+    } ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 

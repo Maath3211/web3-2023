@@ -56,7 +56,7 @@
             VALUES (NULL, '$dateEvent', '$lieu', '$nom', '$dep',0,0,0,0,0,0);";
 
                 if (mysqli_query($conn,    $sql)) {
-                    header("Location: afficher.php");
+                    header("Location: afficher.php?action=2");
                 } else {
                     echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
                 }
@@ -90,7 +90,7 @@
                                     <i class="fs-4 bi-speedometer2"></i>
                                     <h3 class="ms-1 d-none d-sm-inline">Compte</h3>
                                 </a>
-                                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="../compte/creerCompte.php" class="nav-link px-0"> <span class="d-none d-sm-inline"> Ajouter</span></a>
                                     </li>
@@ -105,13 +105,16 @@
                                 <i class="fs-4 bi-bootstrap"></i>
                                 <h2 class="ms-1 d-none d-sm-inline">Évenement</h2>
                             </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 
                                 <li>
                                     <a href="" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
                                 </li>
                                 <li>
-                                    <a href="afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                    <a href="afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
+                                </li>
+                                <li>
+                                    <a href="ajoutDep.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Département</span></a>
                                 </li>
                             </ul>
                             </li>
@@ -155,6 +158,9 @@
 
                 <?php
                 
+        }else {
+            header('Location: ' . '../connexion.php');
+            die();
         }
                 ?>
                 </div>

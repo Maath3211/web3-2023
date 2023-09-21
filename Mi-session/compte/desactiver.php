@@ -32,15 +32,24 @@
             $sql   =   "SELECT   id,   enabled   FROM   usagers WHERE id=$id";
             $result   =   $conn->query($sql);
             while ($row   =   $result->fetch_assoc()) {
-                if($row["enabled"] == 1) $sql    =    "UPDATE `usagers` SET `enabled` = 0 WHERE `usagers`.`id` = $id;";
-                else $sql    =    "UPDATE `usagers` SET `enabled` = 1 WHERE `usagers`.`id` = $id;";
+                if($row["enabled"] == 1){
+                     $sql    =    "UPDATE `usagers` SET `enabled` = 0 WHERE `usagers`.`id` = $id;";
+                     if ($conn->query($sql) === TRUE) {
+                        header("Location: liste.php?action=2");
+                        exit();
+                    }
+                    }
+                else{
+                    $sql    =    "UPDATE `usagers` SET `enabled` = 1 WHERE `usagers`.`id` = $id;";
+                    if ($conn->query($sql) === TRUE) {
+                        header("Location: liste.php?action=3");
+                        exit();
+                    }
+                } 
             }
 
 
-            if ($conn->query($sql) === TRUE) {
-                header("Location: liste.php?action=2");
-                exit();
-            }
+            
 
             $conn->close();
         }

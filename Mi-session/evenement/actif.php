@@ -29,12 +29,27 @@
                 die("Connection failed: " . $conn->connect_error);
             }
             $conn->query('SET NAMES utf8');
-            $sql   =   "DELETE FROM `events` WHERE `events`.`id` = $id";
-
-            if ($conn->query($sql) === TRUE) {
-                header("Location: afficher.php?action=1");
-                exit();
+            $sql   =   "SELECT   id,   actif   FROM   events WHERE id=$id";
+            $result   =   $conn->query($sql);
+            while ($row   =   $result->fetch_assoc()) {
+                if($row["actif"] == 1){
+                     $sql    =    "UPDATE `events` SET `actif` = 0 WHERE `events`.`id` = $id;";
+                     if ($conn->query($sql) === TRUE) {
+                        header("Location: afficher.php?action=3");
+                        exit();
+                    }
+                    }
+                else{
+                    $sql    =    "UPDATE `events` SET `actif` = 1 WHERE `events`.`id` = $id;";
+                    if ($conn->query($sql) === TRUE) {
+                        header("Location: afficher.php?action=4");
+                        exit();
+                    }
+                } 
             }
+
+
+            
 
             $conn->close();
         }

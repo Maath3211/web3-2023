@@ -58,7 +58,10 @@
                                     <a href="../evenement/ajouter.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
                                 </li>
                                 <li>
-                                    <a href="../evenement/afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                    <a href="../evenement/afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
+                                </li>
+                                <li>
+                                    <a href="../evenement/ajoutDep.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Département</span></a>
                                 </li>
                             </ul>
                             </li>
@@ -91,6 +94,11 @@
                                 echo '<div class="alert alert-success" role="alert">
                                         Le compte à été désactiver avec succès
                                      </div>';
+                                break;
+                            case 3:
+                                echo '<div class="alert alert-success" role="alert">
+                                            Le compte à été activer avec succès
+                                         </div>';
                                 break;
                         }
                     } ?>
@@ -138,7 +146,10 @@
             </div>
         </div>
 
-    <?php } ?>
+    <?php } else {
+        header('Location: ' . '../connexion.php');
+        die();
+    } ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 

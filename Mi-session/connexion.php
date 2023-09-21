@@ -37,6 +37,7 @@
                 </form>
 
                 <?php
+                $_SESSION['connexion'] = false;
                 if (!empty($_POST["nom"])) $nom = test_input($_POST["nom"]);
                 if (!empty($_POST["password"])) $pass = test_input($_POST["password"]);
                 
