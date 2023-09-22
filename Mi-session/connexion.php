@@ -15,13 +15,19 @@
 <body>
 
 
-<!--FAIRE STYLE AMAZON-->
-
-
     <div id="container" class="container-fluid">
         <div class="row text-center py-5">
             <div class="col-6 offset-3">
-
+                <?php if (!empty($_GET)) {
+                    $action = $_GET['action'];
+                    switch ($action) {
+                        case 1:
+                            echo '<div class="alert alert-success" role="alert">
+                                        <h4>Déconnexion réussi</h4>
+                                      </div>';
+                            break;
+                    }
+                } ?>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                     <div class="form-group">
                         <label for="nom">Nom d'utilisateur</label>
@@ -40,7 +46,7 @@
                 $_SESSION['connexion'] = false;
                 if (!empty($_POST["nom"])) $nom = test_input($_POST["nom"]);
                 if (!empty($_POST["password"])) $pass = test_input($_POST["password"]);
-                
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $nom = $_POST['nom'];
                     $pass = $_POST['password'];
@@ -65,10 +71,10 @@
                         if ($nom == $row["username"] && $pass == $row["password"] && $row["enabled"] == 1)
                             echo '<h1>Connexion reussi</h1>';
                         $_SESSION['connexion'] = true;
-                        header('Location: ' . 'compte/creerCompte.php');
+                        header('Location: ' . 'evenement/afficher.php');
                         die();
                     } else echo '<br><br><h4 class="rouge">Nom d\'utilisateur ou mot de passe éronné</h4>';
-                        
+
 
                     $conn->close();
                 }

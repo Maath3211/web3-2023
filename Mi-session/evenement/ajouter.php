@@ -61,9 +61,8 @@
                     echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
                 }
                 $conn->close();
+            }
         }
-        
-    }
     ?>
 
 
@@ -74,16 +73,8 @@
 
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
-                    </a> -->
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
-                            <li class="nav-item">
-                                <!-- <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a> -->
-                            </li>
 
                             <li>
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -108,7 +99,7 @@
                             <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 
                                 <li>
-                                    <a href="" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
+                                    <a href="" class="nav-link px-0 text-info"> <span class="d-none d-sm-inline">Ajouter</span></a>
                                 </li>
                                 <li>
                                     <a href="afficher.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
@@ -118,9 +109,7 @@
                                 </li>
                             </ul>
                             </li>
-                            <form action="../deconnexion.php ?>" method="POST">
-                                <button type="submit" class="btn btn-primary btnDecon">Se déconnecter</button>
-                            </form>
+                            <a href="../deconnexion.php"><button type="submit" class="btn btn-primary btnDecon">Se déconnecter</button></a>
                         </ul>
                         </li>
 
@@ -149,19 +138,45 @@
                             <input type="date" class="form-control" name="dateEvent" placeholder="Entrez la date">
                         </div>
                         <div class="form-group mt-2">
-                        <label for="dep">Département</label>
-                        <input type="text" class="form-control" name="dep" placeholder="Entrez le département">
-                    </div>
+                            <div class="form-group">
+                                <label for="dep" class="mt-2">Événement</label>
+                                <select name="dep" id="select" class="form-select">
+                                    <?php
+                                    $servername = "localhost";
+                                    $username = "root";
+                                    $password = "root";
+                                    $db = "smileyface";
+                                    // Create connection
+                                    $conn = new mysqli($servername, $username, $password, $db);
+                                    // Check connection
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                        echo 'Connexion à la base de donnée impossible';
+                                    }
+                                    $conn->query('SET NAMES utf8');
+                                    $sql2   =   "SELECT id, nom FROM `departement`";
+                                    $result2   =   $conn->query($sql2);
+                                    if ($result2->num_rows   >   0) {
+                                        // selected="selected"
+                                        while ($row2   =   $result2->fetch_assoc()) {
+                                            echo ' <option value="' . $row2["nom"] . '">' . $row2["nom"] . '</option>';
+                                        }
+                                    };
+                                    $conn->close();
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
                         <br>
                         <button type="submit" class="btn btn-info">Ajouter un évenement</button>
                     </form>
 
                 <?php
-                
-        }else {
-            header('Location: ' . '../connexion.php');
-            die();
-        }
+
+            } else {
+                header('Location: ' . '../connexion.php');
+                die();
+            }
                 ?>
                 </div>
             </div>

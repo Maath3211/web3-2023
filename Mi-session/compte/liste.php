@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Paramètre</title>
 </head>
@@ -21,16 +21,8 @@
 
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
-                    </a> -->
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
-                            <li class="nav-item">
-                                <!-- <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a> -->
-                            </li>
 
                             <li>
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -43,7 +35,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                        <a href="liste.php" class="nav-link px-0 text-info"> <span class="d-none d-sm-inline">Modifier</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -65,9 +57,7 @@
                                 </li>
                             </ul>
                             </li>
-                            <form action="../deconnexion.php ?>" method="POST">
-                                <button type="submit" class="btn btn-primary btnDecon">Se déconnecter</button>
-                            </form>
+                            <a href="../deconnexion.php"><button type="submit" class="btn btn-primary btnDecon">Se déconnecter</button></a>
                         </ul>
                         </li>
 

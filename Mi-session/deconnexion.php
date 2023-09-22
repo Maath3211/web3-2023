@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die();
 }
  else {
-header('Location: ' . 'connexion.php');
+header('Location: ' . 'connexion.php?action=1');
 die();
 } ?>
 </body>

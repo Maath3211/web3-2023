@@ -22,9 +22,20 @@
     margin-bottom: 1%;
 }
 
-#btnDecon{
+.btnDecon{
     position: fixed;
     bottom: 30px; 
 }
+#row1Mod{
+    height: 15%;
+}
+#creerDep{
+    width: 60%;
+    margin: auto;
+    margin-bottom: 2%;
+}
 
 
+.alDep{
+    margin-top: 2%;
+}
