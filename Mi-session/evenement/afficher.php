@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <title>Paramètre</title>
 </head>
 
@@ -36,7 +37,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="../compte/liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                        <a href="../compte/liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -107,9 +108,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nom de l'évenement</th>
-                                <th scope="col">Lieu</th>
                                 <th scope="col">Département</th>
                                 <th scope="col">Date</th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
@@ -136,9 +137,9 @@
                                     while ($row   =   $result->fetch_assoc()) {
                                         echo '
                                 <td>' . $row["nom"] . '</td> 
-                                <td>' . $row["lieu"] . '</td> 
                                 <td>' . $row["departement"] . '</td> 
                                 <td>' . $row["date"] . '</td> 
+                                <td>  <a href="plusInfo.php?id=' . $row["id"] . '" class="btn btn-primary">Plus d\'information</a> </td>
                                 <td>  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
                                 <td>  <a href="supprimer.php?id=' . $row["id"] . '" class="btn btn-danger">Supprimer</a> </td>
                                 <td>  <a href="actif.php?id=' . $row["id"] . '" class="btn ' . ($row["actif"] == 0 ? 'btn-warning' : 'btn-info') . '">' .
@@ -160,6 +161,8 @@
         header('Location: ' . '../connexion.php');
         die();
     } ?>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 

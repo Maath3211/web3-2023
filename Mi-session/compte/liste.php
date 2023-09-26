@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <title>Paramètre</title>
 </head>
 
@@ -35,7 +36,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="liste.php" class="nav-link px-0 text-info"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                        <a href="liste.php" class="nav-link px-0 text-info"> <span class="d-none d-sm-inline">Afficher</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -96,6 +97,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nom d'utilisateur</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>   
                             </tr>
                         </thead>
                         <tbody>
@@ -120,8 +124,8 @@
                                         echo '
                                 <td>' . $row["username"] . '</td> 
                                 <td>  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
-                                <td>  <a href="desactiver.php?id=' . $row["id"] . '" class="btn ' . ($row["enabled"] == 0 ? 'btn-info' : 'btn-warning') . '">' .
-                                            ($row["enabled"] == 0 ? 'Activer' : 'Desactiver') . '</a> </td>
+                                <td>  <a href="desactiver.php?id=' . $row["id"] . '" class="btn ' . ($row["enabled"] == 1 ? 'btn-info' : 'btn-warning') . '">' .
+                                            ($row["enabled"] == 1 ? 'Actif' : 'Inactif') . '</a> </td>
                                 <td>  <a href="supprimer.php?id=' . $row["id"] . '"  class="btn btn-danger">Supprimer</a> </td>
                                 </tr> ';
                                     }

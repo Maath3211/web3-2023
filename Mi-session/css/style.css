@@ -39,3 +39,8 @@
 .alDep{
     margin-top: 2%;
 }
+
+#chartContainer{
+    height: 20%; 
+    width: 50%;
+}

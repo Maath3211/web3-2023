@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <title>Feedback</title>
 </head>
 
@@ -33,8 +34,18 @@
                             Votre vote a été enregistré.
                           </div>';
                         header("Refresh: 2; url='feedbackEleve.php?id=$id'");
+                        echo '<div class="mt-5" id="divFormEl">
+                        <img src="img/sad-face.png" alt="sad" class="imgFace" />
+    
+                        <img src="img/neutral-face.png" alt="neutral" class="imgFace" />
+    
+                        <img src="img/happiness.png" alt="happy" class="imgFace" />
+                    </div>';
                     }
                 }
+                
+                
+                else{
                 
                 $servername = "localhost";
                 $username = "root";
@@ -77,10 +88,11 @@
                             }
                         }
                     }
+                    $conn->close();
                 } else {
                     echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
                 }
-
+            }
                 ?>
 
 
@@ -88,7 +100,7 @@
         </div>
     </div>
     <?php
-    $conn->close();
+    
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

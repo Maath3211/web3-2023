@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <title>Paramètre</title>
 </head>
 
@@ -52,8 +52,8 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
                 $conn->query('SET NAMES utf8');
-                $sql   =   "INSERT INTO `events` (`id`, `date`, `lieu`, `nom`, `departement`, `bad`, `neutral`, `good`, `badEmp`, `neutralEmp`, `goodEmp`) 
-            VALUES (NULL, '$dateEvent', '$lieu', '$nom', '$dep',0,0,0,0,0,0);";
+                $sql   =   "INSERT INTO `events` (`id`, `date`, `lieu`, `nom`, `departement`, `actif`, `bad`, `neutral`, `good`, `badEmp`, `neutralEmp`, `goodEmp`) 
+            VALUES (NULL, '$dateEvent', '$lieu', '$nom', '$dep',0,0,0,0,0,0,0);";
 
                 if (mysqli_query($conn,    $sql)) {
                     header("Location: afficher.php?action=2");
@@ -87,7 +87,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="../compte/liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                        <a href="../compte/liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
                                     </li>
                                 </ul>
                             </li>

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <title>Paramètre</title>
 </head>
 
@@ -40,7 +40,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="liste.php" class="nav-link px-0 text-info"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                        <a href="liste.php" class="nav-link px-0 text-info"> <span class="d-none d-sm-inline">Afficher</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -80,6 +80,7 @@
                     <div class="row align-items-center" id="row1Mod">
 
                         <?php
+                        
                         $servername    =    "localhost";
                         $username    =    "root";
                         $password    =    "root";
@@ -100,7 +101,7 @@
                         }
                         mysqli_close($conn);
 
-
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $erreur = false;
                         if (empty($_POST['username'])) {
                             $erreur = true;
@@ -114,9 +115,6 @@
                             $erreur = true;
                             echo "La confirmation de mot de passe est requise <br><br>";
                         }
-
-
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" && $erreur == false) {
                             $servername    =    "localhost";
                             $username    =    "root";
                             $password    =    "root";
@@ -127,6 +125,7 @@
                             if (!$conn) {
                                 die("Connection    failed:    "    .    mysqli_connect_error());
                             }
+                            if($erreur == false){
                             $nom = '"' . $_POST['username'] . '"';
                             $pass = $_POST['pass'];
                             $passConf = $_POST['passConf'];
@@ -143,6 +142,7 @@
                                 }
                             } else echo 'Les mots de passe ne correspondent pas<br><br>';
                             $conn->close();
+                        }
                         }
                         ?>
                     </div>

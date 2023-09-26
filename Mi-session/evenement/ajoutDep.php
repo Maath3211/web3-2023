@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <title>Paramètre</title>
 </head>
 
@@ -15,6 +16,13 @@
     <?php
     if ($_SESSION['connexion'] == true) {
 
+        function test_input($data)
+        {
+            $data = trim($data);
+            $data = addslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
     ?>
 
         <div id="container" class="container-fluid">
@@ -36,7 +44,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="../compte/liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Modifier</span></a>
+                                        <a href="../compte/liste.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Afficher</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -80,38 +88,37 @@
                                           </div>';
                                 break;
                         }
-                    } 
-                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                $erreur = false;
-                                if (empty($_POST['nom'])) {
-                                    $erreur = true;
-                                }
+                    }
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        $erreur = false;
+                        if (empty(test_input($_POST['nom']))) {
+                            $erreur = true;
+                        }
 
-                                if ($erreur == false) {
-                                    $nom = $_POST['nom'];
-
-                                    $servername = "localhost";
-                                    $username = "root";
-                                    $password = "root";
-                                    $db = "smileyface";
-                                    // Create connection
-                                    $conn = new mysqli($servername, $username, $password, $db);
-                                    // Check connection
-                                    if ($conn->connect_error) {
-                                        die("Connection failed: " . $conn->connect_error);
-                                    }
-                                    $conn->query('SET NAMES utf8');
-                                    $sql   =   "INSERT INTO `departement` (`id`, `nom`) 
-                    VALUES (NULL, '$nom');";
-
-                                    if (mysqli_query($conn,    $sql)) {
-                                        header("Location: ajoutDep.php?action=2");
-                                    } else {
-                                        echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
-                                    }
-                                    $conn->close();
-                                }
+                        if ($erreur == false) {
+                            $nom = $_POST['nom'];
+                            $servername = "localhost";
+                            $username = "root";
+                            $password = "root";
+                            $db = "smileyface";
+                            // Create connection
+                            $conn = new mysqli($servername, $username, $password, $db);
+                            // Check connection
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
                             }
+                            $conn->query('SET NAMES utf8');
+                            $sql   =   "INSERT INTO `departement` (`id`, `nom`) 
+                                        VALUES (NULL, \"$nom\");";
+
+                            if (mysqli_query($conn,    $sql)) {
+                                header("Location: ajoutDep.php?action=2");
+                            } else {
+                                echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
+                            }
+                            $conn->close();
+                        }
+                    }
                     ?>
                     <table class="table table-hover table-striped" id="tableAjoutDep">
                         <thead>
