@@ -41,7 +41,7 @@
 
                             while ($row   =   $result->fetch_assoc()) {
                                 echo '
-                                <option value="' . $row["id"] . '">' . $row["nom"] . '</option>';
+                                <option class="'. ($row["actif"] == 0 ? 'text-white bg-danger' : '') .'" value="' . $row["id"] . '">' . $row["nom"] . '</option>';
                             }
                         }
                         $conn->close();

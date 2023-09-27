@@ -14,26 +14,23 @@
 
 <body class="bodyCegep">
 
-<img src="img/CTR_Logo_BLANC.png" class="logoCegep">
+    
     <div id="container" class="container-fluid">
-        <div class="row text-center">
-            <div class="col-6 offset-3">
-                
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                    <div class="form-group">
-                        <label for="nom" class="text-white">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" name="nom" placeholder="Entrez le nom d'utilisateur">
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="text-white">Mot de passe</label>
-                        <input type="password" class="form-control" name="password" placeholder="Entrez le mot de passe">
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-info">Connexion</button>
-                    <a href="index.php"><button type="button" class="btn btn-success">Retour</button></a>
-                </form>
+    <div class="row text-center">
+    <div class="col-6 offset-3">
+    <img src="img/CTR_Logo_BLANC.png" class="logoCegepCon">
+    <?php
+    if (!empty($_GET)) {
+        $action = $_GET['action'];
+        switch ($action) {
+            case 1:
+                echo '<br><div class="alert alert-success" role="alert">
+                        <h4>Déconnexion réussi</h4>
+                      </div>';
+                break;
+        }
+    }
 
-                <?php
                 $_SESSION['connexion'] = false;
                 if (!empty($_POST["nom"])) $nom = test_input($_POST["nom"]);
                 if (!empty($_POST["password"])) $pass = test_input($_POST["password"]);
@@ -71,19 +68,27 @@
 
                     $conn->close();
                 }
+    ?>
+    </div>
+    </div>
+        <div class="row text-center">
+            <div class="col-6 offset-3">
 
-                 if (!empty($_GET)) {
-                    $action = $_GET['action'];
-                    switch ($action) {
-                        case 1:
-                            echo '<br><div class="alert alert-success" role="alert">
-                                        <h4>Déconnexion réussi</h4>
-                                      </div>';
-                            break;
-                    }
-                } 
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                    <div class="form-group">
+                        <label for="nom" class="text-white">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" name="nom" placeholder="Entrez le nom d'utilisateur">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="text-white">Mot de passe</label>
+                        <input type="password" class="form-control" name="password" placeholder="Entrez le mot de passe">
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-info">Connexion</button>
+                    <a href="index.php"><button type="button" class="btn btn-success">Retour</button></a>
+                </form>
 
-
+                <?php
                 function test_input($data)
                 {
                     $data = trim($data);

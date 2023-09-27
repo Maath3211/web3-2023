@@ -1,78 +1,92 @@
-.imgFace{
+.imgFace {
     margin: 5%;
     margin-top: 2%;
     width: 20%;
 }
-#btnConn{
+
+#btnConn {
     position: fixed;
     right: 40px;
     top: 10px;
 }
-#btnRet{
+
+#btnRet {
     position: fixed;
     right: 150px;
     top: 10px;
 }
-.rouge{
+
+.rouge {
     color: red;
 }
 
-#actionTxt{
+#actionTxt {
     font-size: 30px;
     margin-bottom: 1%;
 }
 
-.btnDecon{
+.btnDecon {
     position: fixed;
-    bottom: 30px; 
+    bottom: 30px;
 }
-#row1Mod{
+
+#row1Mod {
     height: 15%;
 }
-#creerDep{
+
+#creerDep {
     width: 60%;
     margin: auto;
     margin-bottom: 2%;
 }
 
 
-.alDep{
+.alDep {
     margin-top: 2%;
 }
 
-#chartContainer{
+#chartContainer {
     height: 50%;
 }
-.tab1{
+
+.tab1 {
     display: inline-block;
-            margin-left: 18%;
-}
-.tab2{
-    display: inline-block;
-            margin-left: 45%;
+    margin-left: 18%;
 }
 
-#infoPlus{
+.tab2 {
+    display: inline-block;
+    margin-left: 45%;
+}
+
+#infoPlus {
     font-size: 23px;
 }
-#tblInfo{
+
+#tblInfo {
     font-size: 140%;
 }
-#plusDep{
+
+#plusDep {
     margin-bottom: 5%;
 }
-.menuBar{
+
+.menuBar {
     color: rgb(9, 45, 116);
 }
 
-.bodyCegep{
+.bodyCegep {
     background-color: rgb(9, 45, 116);
 }
 
-.logoCegep{
+.logoCegep {
     width: 25%;
 }
 
-#divAcAff{
+#divAcAff {
     height: 4%;
+}
+
+.logoCegepCon {
+    width: 50%;
 }
