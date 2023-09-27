@@ -41,6 +41,38 @@
 }
 
 #chartContainer{
-    height: 20%; 
-    width: 50%;
+    height: 50%;
+}
+.tab1{
+    display: inline-block;
+            margin-left: 18%;
+}
+.tab2{
+    display: inline-block;
+            margin-left: 45%;
+}
+
+#infoPlus{
+    font-size: 23px;
+}
+#tblInfo{
+    font-size: 140%;
+}
+#plusDep{
+    margin-bottom: 5%;
+}
+.menuBar{
+    color: rgb(9, 45, 116);
+}
+
+.bodyCegep{
+    background-color: rgb(9, 45, 116);
+}
+
+.logoCegep{
+    width: 25%;
+}
+
+#divAcAff{
+    height: 4%;
 }

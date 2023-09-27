@@ -10,22 +10,25 @@
     <title>Feedback</title>
 </head>
 
-<body>
+<body class="bodyCegep">
     <?php
     $id = $_GET['id'];
     ?>
-
+    
 
 
     <a href="connexion.php" id="btnConn" class="btn btn-primary text-center">Connexion</a>
     <a href="index.php" id="btnRet" class="btn btn-danger text-center">Retour</a>
+    <img src="img/CTR_Logo_BLANC.png" class="logoCegep">
     <div id="container" class="container-fluid ">
-        <div class="row text-center py-5">
+    
+        <div class="row text-center ">
+        
             <div class="col-12 ">
 
 
-                <h2 class="mt-5">Comment était l'événement?</h2>
-                <h4>Étudiant</h4>
+                <h2 class="text-white">Comment était l'événement?</h2>
+                <h4 class="text-white">Étudiant</h4>
                 <?php
                 if (!empty($_GET['action'])) {
                     $action = $_GET['action'];

@@ -34,13 +34,13 @@
 
 
                             <li>
-                                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <a href="#submenu1" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-speedometer2"></i>
-                                    <h3 class="ms-1 d-none d-sm-inline">Compte</h3>
+                                    <h3 class="ms-1 d-none d-sm-inline ">Compte</h3>
                                 </a>
-                                <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <ul class="nav flex-column ms-1 " id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
-                                        <a href="../compte/creerCompte.php" class="nav-link px-0"> <span class="d-none d-sm-inline"> Ajouter</span></a>
+                                        <a href="../compte/creerCompte.php" class="nav-link px-0 "> <span class="d-none d-sm-inline"> Ajouter</span></a>
                                     </li>
 
                                     <li>
@@ -49,11 +49,11 @@
                                 </ul>
                             </li>
 
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <a href="#submenu2" class="nav-link px-0 align-middle ">
                                 <i class="fs-4 bi-bootstrap"></i>
                                 <h2 class="ms-1 d-none d-sm-inline">Évenement</h2>
                             </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <ul class="show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 
                                 <li>
                                     <a href="ajouter.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
@@ -162,7 +162,7 @@
                         <div class="form-group text-center">
                             <label for="nom">Ajouter un département</label>
                             <input type="text" class="form-control" id="creerDep" name="nom" placeholder="Entrez le nom du département">
-                            <button type="submit" class="btn btn-info">Créer un département</button>
+                            <button type="submit" class="btn btn-info" id="plusDep">Créer un département</button>
                             <?php
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 if (empty($_POST['nom'])) {

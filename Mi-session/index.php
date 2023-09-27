@@ -10,16 +10,16 @@
     <title>Feedback</title>
 </head>
 
-<body>
+<body class="bodyCegep">
     <a href="connexion.php" id="btnConn" class="btn btn-primary text-center">Connexion</a>
-
+    <img src="img/CTR_Logo_BLANC.png" class="logoCegep">
     <div id="container" class="container-fluid ">
-        <div class="row text-center py-5">
+        <div class="row text-center">
             <div class="col-6 offset-3">
 
-                <h1>Choix de l'événement</h1>
+                <h1 class="text-white">Choix de l'événement</h1>
                 <div class="form-group">
-                    <label for="event" class="mt-2">Événement</label>
+                    <label for="event" class="mt-2 text-white">Événement</label>
                     <select name="event" id="select" class="form-select">
 
                         <?php 
@@ -35,7 +35,7 @@
                             echo 'Connexion à la base de donnée impossible';
                         }
                         $conn->query('SET NAMES utf8');
-                        $sql   =   "SELECT id, nom FROM `events`";
+                        $sql   =   "SELECT id, nom, actif FROM `events` ORDER BY actif DESC";
                         $result   =   $conn->query($sql);
                         if ($result->num_rows   >   0) {
 
@@ -52,6 +52,7 @@
 
                     </select>
                 </div>
+                <br>
                 <button type="button" id="btnFeedEl" class="btn btn-info">Continuer(Étudiant)</button>
                 <button type="button" id="btnFeedEmp" class="btn btn-success">Continuer(Employeur)</button>
 

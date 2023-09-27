@@ -33,11 +33,11 @@
                             </li>
 
                             <li>
-                                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <a href="#submenu1" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-speedometer2"></i>
                                     <h3 class="ms-1 d-none d-sm-inline">Compte</h3>
                                 </a>
-                                <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <ul class="nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="../compte/creerCompte.php" class="nav-link px-0"> <span class="d-none d-sm-inline"> Ajouter</span></a>
                                     </li>
@@ -48,14 +48,14 @@
                                 </ul>
                             </li>
 
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <a href="#submenu2" class="nav-link px-0 align-middle ">
                                 <i class="fs-4 bi-bootstrap"></i>
                                 <h2 class="ms-1 d-none d-sm-inline">Évenement</h2>
                             </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <ul class="show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 
                                 <li>
-                                    <a href="" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
+                                    <a href="ajouter.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Ajouter</span></a>
                                 </li>
                                 <li>
                                     <a href="afficher.php" class="nav-link px-0 text-info"> <span class="d-none d-sm-inline">Afficher</span></a>
@@ -194,6 +194,7 @@
             <button type="submit" class="btn btn-info">Modifier l'évenement</button>
             <br>
             <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
              if (empty($_POST['event'])) {
                 echo "Le nom de l'évenement est requis <br>";
             }
@@ -206,6 +207,7 @@
             if (empty($_POST['dep'])) {
                 echo "Le département est requis <br>";
             }
+        }
             ?>
              
             </form>
