@@ -41,10 +41,7 @@
                 $dateEvent = $_POST['dateEvent'];
                 $dep = $_POST['dep'];
 
-                $servername = "localhost";
-                $username = "root";
-                $password = "root";
-                $db = "smileyface";
+                require("../../ConnServeur.php");
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $db);
                 // Check connection
@@ -142,10 +139,7 @@
                                 <label for="dep" class="mt-2">Événement</label>
                                 <select name="dep" id="select" class="form-select">
                                     <?php
-                                    $servername = "localhost";
-                                    $username = "root";
-                                    $password = "root";
-                                    $db = "smileyface";
+                                    require("../ConnServeur.php");
                                     // Create connection
                                     $conn = new mysqli($servername, $username, $password, $db);
                                     // Check connection

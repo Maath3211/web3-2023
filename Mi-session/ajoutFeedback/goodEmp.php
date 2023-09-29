@@ -11,10 +11,7 @@
     <?php
     $id = $_GET['id'];
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-        $db = "smileyface";
+        require("../ConnServeur.php");
         // Create connection
         $conn = new mysqli($servername, $username, $password, $db);
         // Check connection

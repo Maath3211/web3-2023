@@ -80,11 +80,7 @@
                     <div class="row align-items-center" id="row1Mod">
 
                         <?php
-                        
-                        $servername    =    "localhost";
-                        $username    =    "root";
-                        $password    =    "root";
-                        $dbname    =    "smileyface";
+                        require("../ConnServeur.php");
                         //    Create    connection
                         $conn    =    mysqli_connect($servername,    $username,    $password,    $dbname);
                         //    Check    connection

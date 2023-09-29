@@ -88,5 +88,9 @@
 }
 
 .logoCegepCon {
-    width: 50%;
+    width: 45%;
+}
+
+#divConn{
+    height: 300px;
 }

@@ -23,10 +23,7 @@
                     <select name="event" id="select" class="form-select">
 
                         <?php 
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "root";
-                        $db = "smileyface";
+                        require("ConnServeur.php");
                         // Create connection
                         $conn = new mysqli($servername, $username, $password, $db);
                         // Check connection
@@ -41,7 +38,7 @@
 
                             while ($row   =   $result->fetch_assoc()) {
                                 echo '
-                                <option class="'. ($row["actif"] == 0 ? 'text-white bg-danger' : '') .'" value="' . $row["id"] . '">' . $row["nom"] . '</option>';
+                                <option class="'. ($row["actif"] == 0 ? 'text-whit  e bg-danger' : '') .'" value="' . $row["id"] . '">' . $row["nom"] . '</option>';
                             }
                         }
                         $conn->close();

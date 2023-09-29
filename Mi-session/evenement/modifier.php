@@ -77,10 +77,7 @@
                     
 <!-- PHP modifier -->
 <?php
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "root";
-                    $db = "smileyface";
+                    require("../ConnServeur.php");
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $db);
                     // Check connection
@@ -129,10 +126,7 @@
                     <h2>Modifier un évenement</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <?php
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "root";
-                        $db = "smileyface";
+                        require("../ConnServeur.php");
                         // Create connection
                         $conn = new mysqli($servername, $username, $password, $db);
                         // Check connection

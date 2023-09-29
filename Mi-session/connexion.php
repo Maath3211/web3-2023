@@ -16,8 +16,8 @@
 
     
     <div id="container" class="container-fluid">
-    <div class="row text-center">
-    <div class="col-6 offset-3">
+    <div class="row text-center" id="divConn">
+    <div class="col-6 offset-3" >
     <img src="img/CTR_Logo_BLANC.png" class="logoCegepCon">
     <?php
     if (!empty($_GET)) {
@@ -40,10 +40,7 @@
                     $pass = $_POST['password'];
                     $pass = sha1($pass, false);
 
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "root";
-                    $db = "smileyface";
+                    require("ConnServeur.php");
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $db);
                     // Check connection

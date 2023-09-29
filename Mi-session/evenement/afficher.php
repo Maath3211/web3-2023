@@ -74,7 +74,7 @@
 
 
                 <div class="col-9 ">
-                    <div id="divAcAff" class="m-3">
+                    <div id="divAcAff" class="m-2 m">
                     <?php if (!empty($_GET)) {
                         $action = $_GET['action'];
                         switch ($action) {
@@ -121,10 +121,7 @@
                         <tbody>
                             <tr>
                                 <?php
-                                $servername = "localhost";
-                                $username = "root";
-                                $password = "root";
-                                $db = "smileyface";
+                                require("../ConnServeur.php");
                                 // Create connection
                                 $conn = new mysqli($servername, $username, $password, $db);
                                 // Check connection
@@ -132,7 +129,7 @@
                                     die("Connection failed: " . $conn->connect_error);
                                 }
                                 $conn->query('SET NAMES utf8');
-                                $sql   =   "SELECT   id,nom, lieu,departement,date,actif FROM   events";
+                                $sql   =   "SELECT   id,nom, lieu,departement,date,actif FROM   events ORDER BY date DESC, actif DESC";
                                 $result   =   $conn->query($sql);
                                 if ($result->num_rows   >   0) {
 
