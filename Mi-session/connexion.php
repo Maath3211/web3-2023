@@ -14,22 +14,22 @@
 
 <body class="bodyCegep">
 
-    
+
     <div id="container" class="container-fluid">
-    <div class="row text-center" id="divConn">
-    <div class="col-6 offset-3" >
-    <img src="img/CTR_Logo_BLANC.png" class="logoCegepCon">
-    <?php
-    if (!empty($_GET)) {
-        $action = $_GET['action'];
-        switch ($action) {
-            case 1:
-                echo '<br><div class="alert alert-success" role="alert">
+        <div class="row text-center" id="divConn">
+            <div class="col-6 offset-3">
+                <img src="img/CTR_Logo_BLANC.png" class="logoCegepCon">
+                <?php
+                if (!empty($_GET)) {
+                    $action = $_GET['action'];
+                    switch ($action) {
+                        case 1:
+                            echo '<br><div class="alert alert-success" role="alert">
                         <h4>Déconnexion réussi</h4>
                       </div>';
-                break;
-        }
-    }
+                            break;
+                    }
+                }
 
                 $_SESSION['connexion'] = false;
                 if (!empty($_POST["nom"])) $nom = test_input($_POST["nom"]);
@@ -53,11 +53,12 @@
                     $result   =   $conn->query($sql);
                     if ($result->num_rows   >   0) {
                         $row   =   $result->fetch_assoc();
+
                         if ($nom == $row["username"] && $pass == $row["password"] && $row["enabled"] == 1)
                             echo '<h1>Connexion reussi</h1>';
                         $_SESSION['connexion'] = true;
+                        $_SESSION['ident'] = $row['id'];
                         header('Location: ' . 'evenement/afficher.php');
-                        die();
                     } else echo '<br><div class="alert alert-danger" role="alert">
                     <h4>Nom d\'utilisateur ou mot de passe erroné</h4>
                   </div>';
@@ -65,9 +66,9 @@
 
                     $conn->close();
                 }
-    ?>
-    </div>
-    </div>
+                ?>
+            </div>
+        </div>
         <div class="row text-center">
             <div class="col-6 offset-3">
 

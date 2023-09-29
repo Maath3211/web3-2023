@@ -12,8 +12,10 @@
 
 <body class="bodyCegep">
     <a href="connexion.php" id="btnConn" class="btn btn-primary text-center">Connexion</a>
+    <div class="text-center">
     <img src="img/CTR_Logo_BLANC.png" class="logoCegep">
-    <div id="container" class="container-fluid ">
+    </div>
+    <div id="container" class="container-fluid">
         <div class="row text-center">
             <div class="col-6 offset-3">
 

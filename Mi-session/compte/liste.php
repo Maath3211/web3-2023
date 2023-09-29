@@ -12,9 +12,16 @@
     <title>Paramètre</title>
 </head>
 
-<body>
+<body class="bodyCegep">
     <?php
     if ($_SESSION['connexion'] == true) {
+        require("../ConnServeur.php");
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $db);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
     ?>
 
         <div id="container" class="container-fluid">
@@ -24,7 +31,7 @@
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
-
+                            <img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon">
                             <li>
                                 <a href="#submenu1" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-speedometer2"></i>
@@ -69,79 +76,95 @@
 
 
 
+                <div class="col-7 offset-1 py-5 text-center">
+                <?php
+                $ident = $_SESSION['ident'];
+                $conn->query('SET NAMES utf8');
+                $sql   =   "SELECT * FROM   usagers WHERE id='$ident'";
 
+                $result   =   $conn->query($sql);
+                if ($result->num_rows   >   0) {
+                    $row   =   $result->fetch_assoc();
+                    if ($row['role'] == 'admin') {
+                        $conn->close();
+                ?>
 
-
-                <div class="col-6 offset-1 mt-4">
-                    <?php if (!empty($_GET)) {
-                        $action = $_GET['action'];
-                        switch ($action) {
-                            case 1:
-                                echo '<div class="alert alert-success" role="alert">
+                        
+                            <?php if (!empty($_GET)) {
+                                $action = $_GET['action'];
+                                switch ($action) {
+                                    case 1:
+                                        echo '<div class="alert alert-success" role="alert">
                                         Le compte à été supprimer avec succès
                                       </div>';
-                                break;
-                            case 2:
-                                echo '<div class="alert alert-success" role="alert">
+                                        break;
+                                    case 2:
+                                        echo '<div class="alert alert-success" role="alert">
                                         Le compte à été désactiver avec succès
                                      </div>';
-                                break;
-                            case 3:
-                                echo '<div class="alert alert-success" role="alert">
+                                        break;
+                                    case 3:
+                                        echo '<div class="alert alert-success" role="alert">
                                             Le compte à été activer avec succès
                                          </div>';
-                                break;
-                        }
-                    } ?>
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nom d'utilisateur</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>   
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <?php
-                                require("../ConnServeur.php");
-                                // Create connection
-                                $conn = new mysqli($servername, $username, $password, $db);
-                                // Check connection
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
+                                        break;
                                 }
-                                $conn->query('SET NAMES utf8');
-                                $sql   =   "SELECT   username, id, enabled   FROM   usagers";
-                                $result   =   $conn->query($sql);
-                                if ($result->num_rows   >   0) {
+                            } ?>
+                            <table class="table table-hover table-striped">
 
-                                    while ($row   =   $result->fetch_assoc()) {
-                                        echo '
-                                <td>' . $row["username"] . '</td> 
-                                <td>  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
-                                <td>  <a href="desactiver.php?id=' . $row["id"] . '" class="btn ' . ($row["enabled"] == 1 ? 'btn-info' : 'btn-warning') . '">' .
-                                            ($row["enabled"] == 1 ? 'Actif' : 'Inactif') . '</a> </td>
-                                <td>  <a href="supprimer.php?id=' . $row["id"] . '"  class="btn btn-danger">Supprimer</a> </td>
-                                </tr> ';
+                                <tr>
+                                    <th scope="col" class="bg-th text-white">Nom d'utilisateur</th>
+                                    <th scope="col" class="bg-th text-white">Admin</th>
+                                    <th scope="col" class="bg-th text-white"></th>
+                                    <th scope="col" class="bg-th text-white"></th>
+                                    <th scope="col" class="bg-th text-white"></th>
+                                </tr>
+
+                                <tr>
+                                    <?php
+                                    require("../ConnServeur.php");
+                                    // Create connection
+                                    $conn = new mysqli($servername, $username, $password, $db);
+                                    // Check connection
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
                                     }
-                                }
-                                $conn->close();
+                                    $conn->query('SET NAMES utf8');
+                                    $sql   =   "SELECT   username, id, enabled, role   FROM   usagers";
+                                    $result   =   $conn->query($sql);
+                                    if ($result->num_rows   >   0) {
 
-                                ?>
-                        </tbody>
-                    </table>
+                                        while ($row   =   $result->fetch_assoc()) {
+                                            echo '
+                                <td class="bg-th text-white">' . $row["username"] . '</td> 
+                                <td class="bg-th text-white">' . ($row["role"] == 'admin' ? 'Oui' : 'Non') . '</td> 
+                                <td class="bg-th text-white">  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
+                                <td class="bg-th text-white">  <a href="desactiver.php?id=' . $row["id"] . '" class="btn ' . ($row["enabled"] == 1 ? 'btn-info' : 'btn-warning') . '">' .
+                                                ($row["enabled"] == 1 ? 'Actif' : 'Inactif') . '</a> </td>
+                                <td class="bg-th text-white">  <a href="supprimer.php?id=' . $row["id"] . '"  class="btn btn-danger">Supprimer</a> </td>
+                                </tr> ';
+                                        }
+                                    }
+                                    $conn->close();
 
-                </div>
+                                    ?>
+
+                            </table>
+
+                        </div>
             </div>
         </div>
 
-    <?php } else {
-        header('Location: ' . '../connexion.php');
-        die();
-    } ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+            <?php
+                  }else{ ?> 
+                    <h1 class="text-white"> Vous n'avez pas les permissions pour cette page</h1>
+                    <?php };
+                } 
+            } else {
+                header('Location: ' . '../connexion.php');
+                die();
+            } ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 
 </html>

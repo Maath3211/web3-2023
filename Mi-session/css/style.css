@@ -78,6 +78,12 @@
 .bodyCegep {
     background-color: rgb(9, 45, 116);
 }
+.bg-th{
+    background-color: rgb(113, 113, 113) !important;
+}
+table{
+    border: solid 2px ;
+}
 
 .logoCegep {
     width: 25%;
@@ -94,3 +100,10 @@
 #divConn{
     height: 300px;
 }
+#ajoutCompte{
+    color: chartreuse;
+}
+.requis{
+    color: rgb(255, 0, 0);
+}
+

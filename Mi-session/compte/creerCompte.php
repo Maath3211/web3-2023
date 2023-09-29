@@ -12,9 +12,16 @@
     <title>Paramètre</title>
 </head>
 
-<body>
+<body class="bodyCegep">
     <?php
     if ($_SESSION['connexion'] == true) {
+        require("../ConnServeur.php");
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $db);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
     ?>
 
 
@@ -26,7 +33,7 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-
+                            <img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon">
                             <li>
                                 <a href="#submenu1" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-speedometer2"></i>
@@ -70,47 +77,61 @@
 
 
 
+                <div class="col-7 offset-1 py-5 text-center">
+                <?php 
+                $ident= $_SESSION['ident'];
+                $conn->query('SET NAMES utf8');
+                $sql   =   "SELECT * FROM   usagers WHERE id='$ident'";
 
+                $result   =   $conn->query($sql);
+                if ($result->num_rows   >   0) {
+                    $row   =   $result->fetch_assoc();
+                    if($row['role'] == 'admin'){
+                ?>
 
-
-                <div class="col-6 offset-1 py-5 text-center">
-                    <h2>Ajouter un utilisateur</h2>
+                
+                    <h2 class="text-white">Ajouter un utilisateur</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <div class="form-group">
-                            <label for="nom">Nom d'utilisateur</label>
+                            <label for="nom" class="text-white">Nom d'utilisateur</label>
                             <input type="text" class="form-control" name="nom" placeholder="Entrez le nom d'utilisateur">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="password">Mot de passe</label>
+                            <label for="password" class="text-white">Mot de passe</label>
                             <input type="password" class="form-control" name="password" placeholder="Entrez le mot de passe">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="passwordConf">Confirmation de mot de passe</label>
+                            <label for="passwordConf" class="text-white">Confirmation de mot de passe</label>
                             <input type="password" class="form-control" name="passwordConf" placeholder="Entrez le mot de passe">
                         </div>
                         <!-- <div class="form-group mt-2">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" name="email" placeholder="Entrez l'email">
                     </div> -->
+                        <div class="form-group mt-2">
+                            <input class="form-check-input" name="admin" type="checkbox" value="admin" id="admin">
+                            <label class="form-check-label text-white" for="admin">Admin  <a title="Permet la modification d'usager">&#x1F6C8;</a></label>
+                        </div>
                         <br>
                         <button type="submit" class="btn btn-info">Créer un compte</button>
                     </form>
 
                 <?php
-                
+
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $erreur = false;
                     if (empty($_POST['nom'])) {
                         $erreur = true;
-                        echo "Le nom est requis <br>";
+                        echo "<p class=\"requis fw-bold\">Le nom est requis<br>";
                     }
                     if (empty($_POST['password'])) {
                         $erreur = true;
-                        echo "Le mot de passe est requis <br>";
+                        echo "Le mot de passe est requis<br>";
                     }
                     if (empty($_POST['passwordConf'])) {
                         $erreur = true;
-                        echo "La confirmation de mot de passe est requise <br>";
+                        echo "La confirmation de mot de passe est requise</p>";
                     }
                     // if (empty($_POST['email'])) {
                     //     $erreur = true;
@@ -130,16 +151,13 @@
                         $email = NULL; //$_POST['email'];
                         $userIndispo = false;
 
-                        require("../ConnServeur.php");
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password, $db);
-                        // Check connection
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
+
                         $conn->query('SET NAMES utf8');
-                        $sql   =   "INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `enabled`) 
-                    VALUES (NULL, '$nom', '$email', $pass, 1);";
+                        if (isset($_POST['admin']))
+                            $sql   =   "INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `enabled`,`role`) 
+                    VALUES (NULL, '$nom', '$email', $pass, 1,'admin');";
+                        else $sql   =   "INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `enabled`,`role`) 
+                    VALUES (NULL, '$nom', '$email', $pass, 1,'');";
 
                         $sqlCheck   =   "SELECT   username FROM   usagers";
                         $result   =   $conn->query($sqlCheck);
@@ -151,19 +169,25 @@
 
                             if ($userIndispo == false) {
                                 if (mysqli_query($conn,    $sql)) {
-                                    echo '<h5 class="text-success">Compte ajouté avec succès<h5>';
+                                    echo '<h5 id="ajoutCompte">Compte ajouté avec succès<h5>';
                                 } else {
                                     echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
                                 }
                             } else echo '<h4 class="rouge font-weight-bold">Nom d\'utilisateur déja utilisé</h4>';
-                            $conn->close();
                         }
                     }
                 }
-            }else {
+            } else{ ?> 
+            <h1 class="text-white"> Vous n'avez pas les permissions pour cette page</h1>
+            <?php };
+        } 
+            } else {
                 header('Location: ' . '../connexion.php');
                 die();
-            } ?>
+            }
+
+       
+            $conn->close(); ?>
                 </div>
             </div>
         </div>
