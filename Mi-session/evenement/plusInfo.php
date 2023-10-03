@@ -11,7 +11,7 @@
     <title>Plus d'information</title>
 </head>
 
-<body>
+<body class="bodyCegep">
     <?php
     if ($_SESSION['connexion'] == true) {
         if (!empty($_GET["id"])) $id = $_GET['id'];
@@ -27,8 +27,7 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon">
-
+                        <a href="https://www.cegeptr.qc.ca" target="_blank"><img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon"></a>
                             <li>
                                 <a href="#submenu1" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-speedometer2"></i>
@@ -106,18 +105,18 @@
                     <table class="table table-borderless text-center" id="tblInfo">
                         <thead>
                             <tr>
-                                <th scope="col" class="font-weight-bold">Nom de l'évenement</th>
-                                <th>Date de l'évenement</th>
-                                <th>Lieu de l'évenement</th>
-                                <th>Département</th>
+                                <th scope="col" class="font-weight-bold bg-th text-white">Nom de l'évenement</th>
+                                <th class="bg-th text-white">Date de l'évenement</th>
+                                <th class="bg-th text-white">Lieu de l'évenement</th>
+                                <th class="bg-th text-white">Département</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                            <td><?php echo $nom ?></td> 
-                            <td><?php echo $date ?></td> 
-                            <td><?php echo $lieu ?></td> 
-                            <td><?php echo $dep ?></td> 
+                            <td class="bg-th text-white"><?php echo $nom ?></td> 
+                            <td class="bg-th text-white"><?php echo $date ?></td> 
+                            <td class="bg-th text-white"><?php echo $lieu ?></td> 
+                            <td class="bg-th text-white"><?php echo $dep ?></td> 
                             </tr>
                         </tbody>
                     </table>
@@ -142,7 +141,7 @@
 
                                         var chart = new CanvasJS.Chart("chartContainer", {
                                             animationEnabled: true,
-                                            theme: "light2",
+                                            theme: "dark2",
                                             title: {
                                                 text: "Avis des Participants"
                                             },
@@ -161,7 +160,7 @@
                                 </script>
                                 <div id="chartContainer"></div>
                                 <div class="col-12">
-                                    <h3><span class="tab1"></span>Étudiant<span class="tab2"></span>Entreprise</h3>
+                                    <h3 class="text-white"><span class="tab1"></span>Étudiant<span class="tab2"></span>Entreprise</h3>
                                 </div>
 
 

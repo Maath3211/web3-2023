@@ -32,12 +32,10 @@
                 }
 
                 $_SESSION['connexion'] = false;
-                if (!empty($_POST["nom"])) $nom = test_input($_POST["nom"]);
-                if (!empty($_POST["password"])) $pass = test_input($_POST["password"]);
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $nom = $_POST['nom'];
-                    $pass = $_POST['password'];
+                    $nom = test_input($_POST["nom"]);
+                    $pass = test_input($_POST["password"]);
                     $pass = sha1($pass, false);
 
                     require("ConnServeur.php");

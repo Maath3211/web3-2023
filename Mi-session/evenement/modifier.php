@@ -12,7 +12,7 @@
     <title>Paramètre</title>
 </head>
 
-<body>
+<body class="bodyCegep">
     <?php
     if ($_SESSION['connexion'] == true) {
         if (!empty($_GET["id"])) $id = $_GET['id'];
@@ -28,7 +28,7 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon">
+                        <a href="https://www.cegeptr.qc.ca" target="_blank"><img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon"></a>
                             <li class="nav-item">
                             </li>
 
@@ -123,7 +123,7 @@
                     <!-- Afficher info -->
 
 
-                    <h2>Modifier un évenement</h2>
+                    <h2 class="text-white">Modifier un évenement</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <?php
                         require("../ConnServeur.php");
@@ -143,23 +143,23 @@
                             while ($row   =   $result->fetch_assoc()) {
                                 echo '
                                 <div class="form-group">
-                    <input type="text" hidden class="form-control" name="id" value="' . $row['id'] . '">
+                    <input type="text" hidden class="form-control " name="id" value="' . $row['id'] . '">
                 </div>
                                             <div class="form-group">
-                            <label for="event">Nom de l\'évenement</label>
+                            <label for="event" class="text-white" >Nom de l\'évenement</label>
                             <input type="text" class="form-control" name="event" value="' . $row['nom'] . '" placeholder="Entrez le nom de l\'évenement">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="lieu">Lieu</label>
+                            <label for="lieu" class="text-white">Lieu</label>
                             <input type="text" class="form-control" name="lieu" value="' . $row['lieu'] . '" placeholder="Entrez le Lieu">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="dateEvent">Date</label>
+                            <label for="dateEvent" class="text-white">Date</label>
                             <input type="date" class="form-control" name="dateEvent" value="' . $row['date'] . '" placeholder="Entrez la date">
                         </div>
                         <div class="form-group mt-2">
                             <div class="form-group">
-                                <label for="dep" class="mt-2">Événement</label>
+                                <label for="dep" class="mt-2 text-white">Événement</label>
                                 <select name="dep" id="select" class="form-select">
                                 ';
                                 $sql2   =   "SELECT id, nom FROM `departement`";
@@ -190,16 +190,13 @@
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
              if (empty($_POST['event'])) {
-                echo "Le nom de l'évenement est requis <br>";
+                echo "<p class='text-white'>Le nom de l'évenement est requis </p>";
             }
             if (empty($_POST['lieu'])) {
-                echo "Le lieu est requis <br>";
+                echo "<p class='text-white'>Le lieu est requis </p>";
             }
             if (empty($_POST['dateEvent'])) {
-                echo "La date est requise <br>";
-            }
-            if (empty($_POST['dep'])) {
-                echo "Le département est requis <br>";
+                echo "<p class='text-white'>La date est requise </p>";
             }
         }
             ?>

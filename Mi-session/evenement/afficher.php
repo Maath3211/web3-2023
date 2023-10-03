@@ -12,7 +12,7 @@
     <title>Paramètre</title>
 </head>
 
-<body>
+<body class="bodyCegep">
     <?php
     if ($_SESSION['connexion'] == true) {
 
@@ -24,8 +24,7 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-
-                        <img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon">
+                        <a href="https://www.cegeptr.qc.ca" target="_blank"><img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon"></a>
                             <li>
                                 <a href="#submenu1" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-speedometer2"></i>
@@ -73,33 +72,33 @@
 
 
 
-                <div class="col-9 ">
+                <div class="col-7 offset-1 ">
                     <div id="divAcAff" class="m-2 m">
                     <?php if (!empty($_GET)) {
                         $action = $_GET['action'];
                         switch ($action) {
                             case 1:
-                                echo '<div class="alert alert-success" role="alert">
+                                echo '<div class="alert alert-success mb-5" role="alert">
                                         L\'évenement à été supprimer avec succès
                                       </div>';
                                 break;
                             case 2:
-                                echo '<div class="alert alert-success" role="alert">
+                                echo '<div class="alert alert-success mb-5" role="alert">
                                             L\'évenement à été ajouter avec succès
                                           </div>';
                                 break;
                             case 3:
-                                echo '<div class="alert alert-success" role="alert">
+                                echo '<div class="alert alert-success mb-5" role="alert">
                                 L\'évenement à été désactiver avec succès
                                               </div>';
                                 break;
                             case 4:
-                                echo '<div class="alert alert-success" role="alert">
+                                echo '<div class="alert alert-success mb-5" role="alert">
                                 L\'évenement à été activé avec succès
                                                   </div>';
                                 break;
                             case 5:
-                                echo '<div class="alert alert-success" role="alert">
+                                echo '<div class="alert alert-success mb-5" role="alert">
                                     L\'évenement à été modifier avec succès
                                                       </div>';
                                 break;
@@ -109,13 +108,13 @@
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Nom de l'évenement</th>
-                                <th scope="col">Département</th>
-                                <th scope="col">Date</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
+                                <th scope="col" class="bg-th text-white">Nom de l'évenement</th>
+                                <th scope="col" class="bg-th text-white">Département</th>
+                                <th scope="col" class="bg-th text-white">Date</th>
+                                <th scope="col" class="bg-th text-white"></th>
+                                <th scope="col" class="bg-th text-white"></th>
+                                <th scope="col" class="bg-th text-white"></th>
+                                <th scope="col" class="bg-th text-white"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -135,13 +134,13 @@
 
                                     while ($row   =   $result->fetch_assoc()) {
                                         echo '
-                                <td>' . $row["nom"] . '</td> 
-                                <td>' . $row["departement"] . '</td> 
-                                <td>' . $row["date"] . '</td> 
-                                <td>  <a href="plusInfo.php?id=' . $row["id"] . '" class="btn btn-primary">Plus d\'information</a> </td>
-                                <td>  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
-                                <td>  <a href="supprimer.php?id=' . $row["id"] . '" class="btn btn-danger">Supprimer</a> </td>
-                                <td>  <a href="actif.php?id=' . $row["id"] . '" class="btn ' . ($row["actif"] == 0 ? 'btn-warning' : 'btn-info') . '">' .
+                                <td class="bg-th text-white">' . $row["nom"] . '</td> 
+                                <td class="bg-th text-white">' . $row["departement"] . '</td> 
+                                <td class="bg-th text-white">' . $row["date"] . '</td> 
+                                <td class="bg-th text-white">  <a href="plusInfo.php?id=' . $row["id"] . '" class="btn btn-primary">Plus d\'information</a> </td>
+                                <td class="bg-th text-white">  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
+                                <td class="bg-th text-white">  <a href="supprimer.php?id=' . $row["id"] . '" class="btn btn-danger">Supprimer</a> </td>
+                                <td class="bg-th text-white">  <a href="actif.php?id=' . $row["id"] . '" class="btn ' . ($row["actif"] == 0 ? 'btn-warning' : 'btn-info') . '">' .
                                             ($row["actif"] == 0 ? 'Inactif' : 'Actif') . '</a> </td>
                                 </tr> ';
                                     }

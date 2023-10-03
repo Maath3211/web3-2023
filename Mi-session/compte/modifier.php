@@ -32,7 +32,7 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                            <img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon">
+                        <a href="https://www.cegeptr.qc.ca" target="_blank"><img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon"></a>
                             <li class="nav-item">
                             </li>
 
@@ -176,8 +176,7 @@
                                     </div>
                                     
                                     <div class="form-group">
-                                        <!-- IS NOT CHECKED WHEN ADMIN -->
-                                        <input class="form-check-input" name="admin" <?php ($row['role'] == 'admin' ? 'checked' : ' ') ?> type="checkbox" value="admin" id="admin">
+                                        <input class="form-check-input" name="admin" <?php echo ($row['role'] == 'admin' ? 'checked' : ' ') ?> type="checkbox" value="admin" id="admin">
                                         <label class="form-check-label text-white" for="admin">Admin</label>
                                     </div>
                                     <div class="form-group">
@@ -194,7 +193,7 @@
                         <?php
                         
                     }else { ?>
-                        <h1 class="text-white"> Vous n'avez pas les permissions pour cette page</h1>
+                        <h1 class="text-white"> Vous n'avez pas les permissions nécessaires pour cette page</h1>
             <?php };    
                 } 
                 } else {

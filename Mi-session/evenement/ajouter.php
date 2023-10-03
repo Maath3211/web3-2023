@@ -12,7 +12,7 @@
     <title>Paramètre</title>
 </head>
 
-<body>
+<body class="bodyCegep">
     <?php
     if ($_SESSION['connexion'] == true) {
 
@@ -41,7 +41,7 @@
                 $dateEvent = $_POST['dateEvent'];
                 $dep = $_POST['dep'];
 
-                require("../../ConnServeur.php");
+                require("../ConnServeur.php");
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $db);
                 // Check connection
@@ -71,7 +71,7 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon">
+                        <a href="https://www.cegeptr.qc.ca" target="_blank"><img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon"></a>
 
                             <li>
                                 <a href="#submenu1" class="nav-link px-0 align-middle">
@@ -119,24 +119,24 @@
 
 
 
-                <div class="col-6 offset-1 py-5 text-center">
-                    <h2>Ajouter un évenement</h2>
+                <div class="col-7 offset-1 py-5 text-center">
+                    <h2 class="text-white">Ajouter un évenement</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <div class="form-group">
-                            <label for="event">Nom de l'évenement</label>
+                            <label for="event" class="text-white">Nom de l'évenement</label>
                             <input type="text" class="form-control" name="event" placeholder="Entrez le nom de l'évenement">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="lieu">Lieu</label>
+                            <label for="lieu" class="text-white">Lieu</label>
                             <input type="text" class="form-control" name="lieu" placeholder="Entrez le Lieu">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="dateEvent">Date</label>
+                            <label for="dateEvent" class="text-white">Date</label>
                             <input type="date" class="form-control" name="dateEvent" placeholder="Entrez la date">
                         </div>
                         <div class="form-group mt-2">
                             <div class="form-group">
-                                <label for="dep" class="mt-2">Événement</label>
+                                <label for="dep" class="mt-2 text-white">Événement</label>
                                 <select name="dep" id="select" class="form-select">
                                     <?php
                                     require("../ConnServeur.php");
