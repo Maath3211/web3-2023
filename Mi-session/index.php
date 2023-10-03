@@ -52,6 +52,7 @@
                     </select>
                 </div>
                 <br>
+                <!-- redirigé en javascript -->
                 <button type="button" id="btnFeedEl" class="btn btn-info">Continuer(Étudiant)</button>
                 <button type="button" id="btnFeedEmp" class="btn btn-success">Continuer(Employeur)</button>
 

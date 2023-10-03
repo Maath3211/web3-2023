@@ -30,7 +30,7 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <a href="https://www.cegeptr.qc.ca" target="_blank"><img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon"></a>
+                            <a href="https://www.cegeptr.qc.ca" target="_blank"><img src="../img/CTR_Logo_BLANC.png" class="logoCegepCon"></a>
                             <li>
                                 <a href="#submenu1" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-speedometer2"></i>
@@ -76,19 +76,19 @@
 
 
                 <div class="col-7 offset-1 py-5 text-center">
-                <?php
-                $ident = $_SESSION['ident'];
-                $conn->query('SET NAMES utf8');
-                $sql   =   "SELECT * FROM   usagers WHERE id='$ident'";
+                    <?php
+                    $ident = $_SESSION['ident'];
+                    $conn->query('SET NAMES utf8');
+                    $sql   =   "SELECT * FROM   usagers WHERE id='$ident'";
 
-                $result   =   $conn->query($sql);
-                if ($result->num_rows   >   0) {
-                    $row   =   $result->fetch_assoc();
-                    if ($row['role'] == 'admin') {
-                        $conn->close();
-                ?>
+                    $result   =   $conn->query($sql);
+                    if ($result->num_rows   >   0) {
+                        $row   =   $result->fetch_assoc();
+                        if ($row['role'] == 'admin') {
+                            $conn->close();
+                    ?>
 
-                        
+
                             <?php if (!empty($_GET)) {
                                 $action = $_GET['action'];
                                 switch ($action) {
@@ -132,16 +132,19 @@
                                     $sql   =   "SELECT   username, id, enabled, role   FROM   usagers";
                                     $result   =   $conn->query($sql);
                                     if ($result->num_rows   >   0) {
-
                                         while ($row   =   $result->fetch_assoc()) {
-                                            echo '
+// L'utilisateur avec le nom root n'apparait pas dans la liste sur le site
+// L'utilisateur peut exister en tant que backup s'il y a un probleme avec les autres comptes
+                                            if ($row['username'] != 'root') {
+                                                echo '
                                 <td class="bg-th text-white">' . $row["username"] . '</td> 
                                 <td class="bg-th text-white">' . ($row["role"] == 'admin' ? 'Oui' : 'Non') . '</td> 
                                 <td class="bg-th text-white">  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
                                 <td class="bg-th text-white">  <a href="desactiver.php?id=' . $row["id"] . '" class="btn ' . ($row["enabled"] == 1 ? 'btn-info' : 'btn-warning') . '">' .
-                                                ($row["enabled"] == 1 ? 'Actif' : 'Inactif') . '</a> </td>
+                                                    ($row["enabled"] == 1 ? 'Actif' : 'Inactif') . '</a> </td>
                                 <td class="bg-th text-white">  <a href="supprimer.php?id=' . $row["id"] . '"  class="btn btn-danger">Supprimer</a> </td>
                                 </tr> ';
+                                            }
                                         }
                                     }
                                     $conn->close();
@@ -150,19 +153,19 @@
 
                             </table>
 
-                        </div>
+                </div>
             </div>
         </div>
 
-            <?php
-                  }else{ ?> 
-                    <h1 class="text-white"> Vous n'avez pas les permissions nécessaires pour cette page</h1>
-                    <?php };
-                } 
-            } else {
-                header('Location: ' . '../connexion.php');
-                die();
-            } ?>
+    <?php
+                        } else { ?>
+        <h1 class="text-white"> Vous n'avez pas les permissions nécessaires pour cette page</h1>
+<?php };
+                    }
+                } else {
+                    header('Location: ' . '../connexion.php');
+                    die();
+                } ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 
