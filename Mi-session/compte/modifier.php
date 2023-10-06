@@ -177,7 +177,7 @@
                                     
                                     <div class="form-group">
                                         <input class="form-check-input" name="admin" <?php echo ($row['role'] == 'admin' ? 'checked' : ' ') ?> type="checkbox" value="admin" id="admin">
-                                        <label class="form-check-label text-white" for="admin">Admin</label>
+                                        <label class="form-check-label text-white" for="admin">Admin <a title="Permet la modification d'usager">&#x1F6C8;</a></label>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" hidden class="form-control" name="id" value="<?php echo $id ?>">

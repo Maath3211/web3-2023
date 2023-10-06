@@ -148,16 +148,15 @@
                         $nom = $_POST['nom'];
                         $pass = $_POST['password'];
                         $pass = "'" . sha1($pass, false) . "'";
-                        $email = NULL; //$_POST['email'];
                         $userIndispo = false;
 
 
                         $conn->query('SET NAMES utf8');
                         if (isset($_POST['admin']))
-                            $sql   =   "INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `enabled`,`role`) 
-                    VALUES (NULL, '$nom', '$email', $pass, 1,'admin');";
-                        else $sql   =   "INSERT INTO `usagers` (`id`, `username`, `email`, `password`, `enabled`,`role`) 
-                    VALUES (NULL, '$nom', '$email', $pass, 1,'');";
+                            $sql   =   "INSERT INTO `usagers` (`id`, `username`,, `password`, `enabled`,`role`) 
+                    VALUES (NULL, '$nom',  $pass, 1,'admin');";
+                        else $sql   =   "INSERT INTO `usagers` (`id`, `username`, `password`, `enabled`,`role`) 
+                    VALUES (NULL, '$nom', $pass, 1,'');";
 
                         $sqlCheck   =   "SELECT   username FROM   usagers";
                         $result   =   $conn->query($sqlCheck);

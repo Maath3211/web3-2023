@@ -17,6 +17,13 @@
     if ($_SESSION['connexion'] == true) {
         if (!empty($_GET["id"])) $id = $_GET['id'];
         if (!empty($_POST["id"])) $id = $_POST['id'];
+        function test_input($data)
+        {
+            $data = trim($data);
+            $data = addslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
     ?>
 
 
@@ -103,7 +110,7 @@
                             $nom = $_POST['event'];
                             $lieu = $_POST['lieu'];
                             $dateEvent = $_POST['dateEvent'];
-                            $dep = $_POST['dep'];
+                            $dep = test_input($_POST['dep']);
                             $id = $_POST['id'];
 
 

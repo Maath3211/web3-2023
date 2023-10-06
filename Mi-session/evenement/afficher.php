@@ -136,7 +136,7 @@
                                         echo '
                                 <td class="bg-th text-white">' . $row["nom"] . '</td> 
                                 <td class="bg-th text-white">' . $row["departement"] . '</td> 
-                                <td class="bg-th text-white">' . $row["date"] . '</td> 
+                                <td class="bg-th text-white dateAff">' . $row["date"] . '</td> 
                                 <td class="bg-th text-white">  <a href="plusInfo.php?id=' . $row["id"] . '" class="btn btn-primary">Plus d\'information</a> </td>
                                 <td class="bg-th text-white">  <a href="modifier.php?id=' . $row["id"] . '" class="btn btn-primary">Modifier</a> </td>
                                 <td class="bg-th text-white">  <a href="supprimer.php?id=' . $row["id"] . '" class="btn btn-danger">Supprimer</a> </td>

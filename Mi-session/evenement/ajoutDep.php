@@ -23,6 +23,9 @@
             $data = htmlspecialchars($data);
             return $data;
         }
+
+
+
     ?>
 
         <div id="container" class="container-fluid">
@@ -89,6 +92,47 @@
                                 break;
                         }
                     }
+
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        $erreur = false;
+                        if (empty($_POST['nom'])) {
+                            $erreur = true;
+                        } else $nom = test_input($_POST['nom']);
+
+                        require("../ConnServeur.php");
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $db);
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+                        
+                        $conn->query('SET NAMES utf8');
+                        $sql   =   "SELECT   id,nom FROM   departement";
+                        $result   =   $conn->query($sql);
+                        if ($result->num_rows   >   0) {
+                            while ($row   =   $result->fetch_assoc()) {
+                                if ($nom == $row['nom']) {
+                                    $erreur = true;
+                                    echo '<div class="alert alert-warning alDep" role="alert">
+                                    Le nom de département est déja utilisé
+                                  </div>';
+                                }
+                            }
+                        }
+                        if ($erreur == false) {
+
+
+                            $sql   =   "INSERT INTO `departement` (`id`, `nom`) 
+                                VALUES (NULL, '$nom');";
+                            if (mysqli_query($conn,    $sql)) {
+                                header("Location: ajoutDep.php?action=2");
+                            } else {
+                                echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
+                            }
+                        }
+                        $conn->close();
+                    }
                     ?>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="formAjoutDep" method="POST">
                         <div class="form-group text-center mt-3">
@@ -96,6 +140,9 @@
                             <input type="text" class="form-control" id="creerDep" name="nom" placeholder="Entrez le nom du département">
                             <button type="submit" class="btn btn-info" id="plusDep">Créer un département</button>
                             <?php
+
+
+
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 if (empty($_POST['nom'])) {
                                     echo "<h5 class='text-white'>Le nom du département est requis <br></h5>";
@@ -105,34 +152,7 @@
                         </div>
                     </form>
 
-                    <?php
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $erreur = false;
-                        if (empty(test_input($_POST['nom']))) {
-                            $erreur = true;
-                        }
 
-                        if ($erreur == false) {
-                            require("../ConnServeur.php");
-                            // Create connection
-                            $conn = new mysqli($servername, $username, $password, $db);
-                            // Check connection
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
-                            $conn->query('SET NAMES utf8');
-                            $sql   =   "INSERT INTO `departement` (`id`, `nom`) 
-                                        VALUES (NULL, \"$nom\");";
-
-                            if (mysqli_query($conn,    $sql)) {
-                                header("Location: ajoutDep.php?action=2");
-                            } else {
-                                echo    "Error:    "    .    $sql    .    "<br>"    .    mysqli_error($conn);
-                            }
-                            $conn->close();
-                        }
-                    }
-                    ?>
                     <table class="table table-hover table-striped" id="tableAjoutDep">
                         <thead>
                             <tr>
